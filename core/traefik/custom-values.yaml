@@ -1,0 +1,19 @@
+logs:
+  loglevel: DEBUG
+
+Global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+entryPoints:
+  http:
+    address: ":80"
+  https:
+    address: ":443"
+
+providers:
+  kubernetesCRD:
+
+api:
+  dashboard: true
+ping:

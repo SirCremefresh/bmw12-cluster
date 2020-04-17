@@ -1,5 +1,13 @@
 
+# install resources
+```
+kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.1/cert-manager.crds.yaml
+kubectl create namespace cert-manager
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install cert-manager jetstack/cert-manager --namespace cert-manager 
 
+```
 
 # create service account
 ```
@@ -27,12 +35,11 @@ kubectl create -n cert-manager secret generic clouddns-dns01-solver-svc-acct \
 # apply
 ```
 kubectl apply -f cluster-issuer.letsencrypt-staging.yaml
-kubectl apply -f certificate-staging.yaml
 ```
 
 # remove cert
 ```
- kubectl delete certificates bmw12-ch
+ kubectl delete certificates staging-bmw12-ch
 
 ```
 
