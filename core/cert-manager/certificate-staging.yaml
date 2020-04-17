@@ -1,0 +1,30 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: staging-bmw12-ch
+  namespace: default
+spec:
+  secretName: staging-bmw12-ch-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: cluster-issuer-letsencrypt-staging
+  dnsNames:
+    - 'bmw12.ch'
+    - '*.bmw12.ch'
+    - '*.intra.bmw12.ch'
+
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: staging-sircremefresh-ch
+  namespace: default
+spec:
+  secretName: staging-sircremefresh-ch-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: cluster-issuer-letsencrypt-staging
+  dnsNames:
+    - 'sircremefresh.ch'
+    - '*.sircremefresh.ch'
+    - '*.intra.sircremefresh.ch'

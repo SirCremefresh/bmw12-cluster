@@ -22,16 +22,22 @@ gcloud --project=sircremefresh iam service-accounts keys create key.json \
 kubectl create -n cert-manager secret generic clouddns-dns01-solver-svc-acct \
    --from-file=key.json
 ```
-error getting clouddns service account: secret \"clouddns-dns01-solver-svc-acct\" not found" "key"="default/bmw12-ch-199344237-510406862-792020725
 
 
 # apply
 ```
-kubectl apply -f cert-manager.letsencrypt-staging.yaml
+kubectl apply -f cluster-issuer.letsencrypt-staging.yaml
+kubectl apply -f certificate-staging.yaml
 ```
 
 # remove cert
 ```
  kubectl delete certificates bmw12-ch
+
+```
+
+# logs
+```
+kubectl logs -n cert-manager deploy/cert-manager -f
 
 ```
