@@ -15,6 +15,8 @@ sudo cat /var/lib/rancher/k3s/server/node-token
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" K3S_URL="https://srv01.intra.bmw12.ch:6443" K3S_TOKEN="the_token" sh -
 ```
 
+helm repo add stable https://kubernetes-charts.storage.googleapis.com
+
 ## Remote Connect
 ```shell script
 # install kubectl and helm
