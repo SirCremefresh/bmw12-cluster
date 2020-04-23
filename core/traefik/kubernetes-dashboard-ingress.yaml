@@ -1,19 +1,19 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik-whoami
+  name: traefik-kubernetes-dashboard
   namespace: traefik
 spec:
   entryPoints:
     - web
     - websecure
   routes:
-    - match: Host(`whoami.intra.bmw12.ch`)
+    - match: Host(`dashboard.intra.bmw12.ch`)
       kind: Rule
       services:
-        - name: whoami
+        - name: kubernetes-dashboard
           port: 80
-          namespace: whoami
+          namespace: kubernetes-dashboard
 
   tls:
     secretName: staging-bmw12-ch-tls
