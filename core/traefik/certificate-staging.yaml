@@ -13,3 +13,18 @@ spec:
     - '*.bmw12.ch'
     - '*.intra.bmw12.ch'
 
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: staging-sircremefresh-ch
+  namespace: traefik
+spec:
+  secretName: staging-sircremefresh-ch-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: cluster-issuer-letsencrypt-staging
+  dnsNames:
+    - 'sircremefresh.ch'
+    - '*.sircremefresh.ch'
+    - '*.intra.sircremefresh.ch'

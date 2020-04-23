@@ -1,0 +1,18 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-whoami
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`whoami.intra.bmw12.ch`)
+      kind: Rule
+      services:
+        - name: whoami
+          port: 80
+          namespace: whoami
+
+  tls:
+    secretName: staging-bmw12-ch-tls
