@@ -12,7 +12,7 @@ sudo cat /var/lib/rancher/k3s/server/node-token
 
 # install agent srv02
 # replace the token with token
-curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" K3S_URL="https://srv01.intra.bmw12.ch:6443" K3S_TOKEN="the_token" sh -
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" K3S_URL="https://srv01.intra.bmw12.ch:6443" K3S_TOKEN="the_token" sh -s - --docker
 ```
 
 helm repo add stable https://kubernetes-charts.storage.googleapis.com
