@@ -35,6 +35,7 @@ kubectl create -n cert-manager secret generic clouddns-dns01-solver-svc-acct \
 # apply
 ```
 kubectl apply -f cluster-issuer.letsencrypt-staging.yaml
+kubectl apply -f cluster-issuer.letsencrypt-prod.yaml
 ```
 
 # remove cert
