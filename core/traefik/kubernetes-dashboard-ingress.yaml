@@ -16,4 +16,4 @@ spec:
           namespace: kubernetes-dashboard
 
   tls:
-    secretName: staging-bmw12-ch-tls
+    secretName: prod-bmw12-ch-tls
