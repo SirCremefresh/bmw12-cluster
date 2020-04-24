@@ -1,17 +1,19 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik-dashboard
+  name: traefik-rancher
   namespace: traefik
 spec:
   entryPoints:
     - web
     - websecure
   routes:
-    - match: Host(`traefik.intra.bmw12.ch`)
+    - match: Host(`rancher.intra.bmw12.ch`)
       kind: Rule
       services:
-        - name: api@internal
-          kind: TraefikService
+        - name: rancher
+          port: 80
+          namespace: cattle-system
+
   tls:
     secretName: prod-bmw12-ch-tls
