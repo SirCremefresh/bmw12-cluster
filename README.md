@@ -29,3 +29,10 @@ scp bmw12@srv01.intra.bmw12.ch:/etc/rancher/k3s/k3s.yaml ~/.kube/config
 # change localhost to dns
 sed -i 's/127\.0\.0\.1/srv01\.intra\.bmw12\.ch/g' ~/.kube/config
 ```
+
+
+# RPI help
+
+start gui from ssh on x server
+export DISPLAY=:0
+ lxterminal --geometry=150x50 -e "htop"
