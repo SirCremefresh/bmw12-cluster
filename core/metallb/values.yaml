@@ -94,8 +94,8 @@ controller:
     tag: v0.9.3
     pullPolicy: IfNotPresent
   resources: {}
-    # limits:
-    # cpu: 100m
+  # limits:
+  # cpu: 100m
   # memory: 100Mi
   nodeSelector: {}
   tolerations: []
@@ -109,10 +109,11 @@ speaker:
     tag: v0.9.3
     pullPolicy: IfNotPresent
   resources: {}
-    # limits:
-    # cpu: 100m
+  # limits:
+  # cpu: 100m
   # memory: 100Mi
-  nodeSelector: {}
+  nodeSelector:
+    metallb: ""
   tolerations: []
   affinity: {}
   initContainers: []

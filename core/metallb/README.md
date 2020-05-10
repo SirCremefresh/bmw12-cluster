@@ -4,3 +4,8 @@ helm install --namespace=metallb-system  -f values.yaml metallb  stable/metallb 
 
 
 k apply -f metallb-config.yaml 
+
+
+# label nodes
+k label nodes srv01 metallb=
+k label nodes srv02 metallb=
