@@ -6,8 +6,6 @@ helm repo update
 
 kubectl create namespace traefik 
 
-kubectl apply -f certificate-staging.yaml
-
 
 # install
 helm install --namespace=traefik --values=./custom-values.yaml traefik traefik/traefik

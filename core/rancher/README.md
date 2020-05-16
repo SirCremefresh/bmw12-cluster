@@ -6,6 +6,4 @@ helm repo update
 
 kubectl create namespace cattle-system
 
-helm install rancher rancher-latest/rancher \
-  --namespace cattle-system \
-  --set tls=external
+helm install -f values.yaml --namespace cattle-system rancher rancher-latest/rancher --set tls=external

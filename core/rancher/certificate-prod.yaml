@@ -4,7 +4,7 @@ metadata:
   name: prod-bmw12-ch
   namespace: cattle-system
 spec:
-  secretName: prod-bmw12-ch-tls
+  secretName: tls-rancher-ingress
   issuerRef:
     kind: ClusterIssuer
     name: cluster-issuer-letsencrypt-prod
