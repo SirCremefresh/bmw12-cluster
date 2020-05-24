@@ -1,5 +1,5 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   labels:
     k8s-app: kubernetes-dashboard
