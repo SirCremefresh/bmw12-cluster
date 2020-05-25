@@ -21,5 +21,3 @@ speaker:
   image:
     repository: metallb/speaker
     tag: v0.9.3
-  nodeSelector:
-    metallb: ""

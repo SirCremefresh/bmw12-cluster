@@ -2,7 +2,7 @@
 
 
 ## Install
-```shell script
+```bash
 # install on srv01
 curl -sfL https://get.k3s.io | sh -s - server --disable servicelb --disable traefik --no-deploy traefik --no-deploy servicelb --docker --datastore-endpoint="https://srv01.intra.bmw12.ch:2379,https://srv02.intra.bmw12.ch:2379,https://srv03.intra.bmw12.ch:2379" --datastore-cafile="/home/bmw12/etcd/keys/etcd-ca.crt" --datastore-certfile="/home/bmw12/etcd/keys/etcd-ca.crt" --datastore-keyfile="/home/bmw12/etcd/keys/ca-key.pem"
 # get token from master
@@ -13,7 +13,11 @@ sudo cat /var/lib/rancher/k3s/server/node-token
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" K3S_URL="https://kubeapi.intra.bmw12.ch:6443" K3S_TOKEN="the_token" sh -s - --docker
 ```
 
+# add default helm repo
+```bash
 helm repo add stable https://kubernetes-charts.storage.googleapis.com
+helm repo update
+```
 
 ## Remote Connect
 ```bash
