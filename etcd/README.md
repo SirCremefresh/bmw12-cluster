@@ -116,3 +116,10 @@ docker run \
   --logger zap \
   --log-outputs stderr
 ```
+
+# delete 
+```bash
+docker container stop bmw12-etcd-cluster-0
+docker container rm bmw12-etcd-cluster-0
+sudo rm -rf /home/bmw12/etcd/data/*
+```
