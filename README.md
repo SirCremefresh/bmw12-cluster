@@ -28,13 +28,6 @@ scp bmw12@srv01.intra.bmw12.ch:/etc/rancher/k3s/k3s.yaml ~/.kube/config
 sed -i 's/127\.0\.0\.1/srv01\.intra\.bmw12\.ch/g' ~/.kube/config
 ```
 
-# etcd
-install form:  
-https://computingforgeeks.com/setup-etcd-cluster-on-centos-debian-ubuntu/
-
-tls + certificates:  
-https://pcocc.readthedocs.io/en/latest/deps/etcd-production.html
-
 # Laptop
 ## lid
 https://askubuntu.com/questions/141866/keep-ubuntu-server-running-on-a-laptop-with-the-lid-closed
