@@ -27,49 +27,35 @@ export ADDRESS=192.168.1.17,$NAME.intra.bmw12.ch,$NAME
 echo '{"CN":"'$NAME'","hosts":[""],"key":{"algo":"rsa","size":2048}}' | cfssl gencert -config=ca-config.json -ca=ca.pem -ca-key=ca-key.pem -hostname="$ADDRESS" - | cfssljson -bare $NAME
 
 
-ssh srv01 "sudo mkdir /tempdir && sudo chmod 777 /tempdir"
 ssh srv01 "mkdir -p /home/bmw12/etcd/keys && mkdir -p /home/bmw12/etcd/data"
 
-scp ca.pem srv01:/tempdir/etcd-ca.crt
-scp srv01.pem srv01:/tempdir/server.crt
-scp srv01-key.pem srv01:/tempdir/server.key
-
-ssh srv01 "sudo mv /tempdir/etcd-ca.crt /home/bmw12/etcd/keys/etcd-ca.crt"
-ssh srv01 "sudo mv /tempdir/server.crt /home/bmw12/etcd/keys/server.crt"
-ssh srv01 "sudo mv /tempdir/server.key /home/bmw12/etcd/keys/server.key"
+scp ca.pem srv01:/home/bmw12/etcd/keys/etcd-ca.crt
+scp ca-key.pem srv01:/home/bmw12/etcd/keys/ca-key.pem
+scp srv01.pem srv01:/home/bmw12/etcd/keys/server.crt
+scp srv01-key.pem srv01:/home/bmw12/etcd/keys/server.key
 
 ssh srv01 "sudo chmod 600 /home/bmw12/etcd/keys/server.key"
 
 
 
-ssh srv02 "sudo mkdir /tempdir && sudo chmod 777 /tempdir"
 ssh srv02 "mkdir -p /home/bmw12/etcd/keys && mkdir -p /home/bmw12/etcd/data"
 
-scp ca.pem srv02:/tempdir/etcd-ca.crt
-scp srv02.pem srv02:/tempdir/server.crt
-scp srv02-key.pem srv02:/tempdir/server.key
-
-ssh srv02 "sudo mv /tempdir/etcd-ca.crt /home/bmw12/etcd/keys/etcd-ca.crt"
-ssh srv02 "sudo mv /tempdir/server.crt /home/bmw12/etcd/keys/server.crt"
-ssh srv02 "sudo mv /tempdir/server.key /home/bmw12/etcd/keys/server.key"
+scp ca.pem srv02:/home/bmw12/etcd/keys/etcd-ca.crt
+scp ca-key.pem srv02:/home/bmw12/etcd/keys/ca-key.pem
+scp srv02.pem srv02:/home/bmw12/etcd/keys/server.crt
+scp srv02-key.pem srv02:/home/bmw12/etcd/keys/server.key
 
 ssh srv02 "sudo chmod 600 /home/bmw12/etcd/keys/server.key"
-ssh srv02 "sudo rm -r /tempdir"
 
 
-ssh srv03 "sudo mkdir /tempdir && sudo chmod 777 /tempdir"
 ssh srv03 "mkdir -p /home/bmw12/etcd/keys && mkdir -p /home/bmw12/etcd/data"
 
-scp ca.pem srv03:/tempdir/etcd-ca.crt
-scp srv03.pem srv03:/tempdir/server.crt
-scp srv03-key.pem srv03:/tempdir/server.key
-
-ssh srv03 "sudo mv /tempdir/etcd-ca.crt /home/bmw12/etcd/keys/etcd-ca.crt"
-ssh srv03 "sudo mv /tempdir/server.crt /home/bmw12/etcd/keys/server.crt"
-ssh srv03 "sudo mv /tempdir/server.key /home/bmw12/etcd/keys/server.key"
+scp ca.pem srv03:/home/bmw12/etcd/keys/etcd-ca.crt
+scp ca-key.pem srv03:/home/bmw12/etcd/keys/ca-key.pem
+scp srv03.pem srv03:/home/bmw12/etcd/keys/server.crt
+scp srv03-key.pem srv03:/home/bmw12/etcd/keys/server.key
 
 ssh srv03 "sudo chmod 600 /home/bmw12/etcd/keys/server.key"
-ssh srv03 "sudo rm -r /tempdir"
 
 
 
