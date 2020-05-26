@@ -33,7 +33,7 @@ scp bmw12@srv01.intra.bmw12.ch:/home/bmw12/k3s-tmp ~/.kube/config
 ssh bmw12@srv01.intra.bmw12.ch "sudo rm /home/bmw12/k3s-tmp"
 
 # change localhost to dns
-sed -i 's/127\.0\.0\.1/srv01\.intra\.bmw12\.ch/g' ~/.kube/config
+sed -i 's/127\.0\.0\.1/kubeapi\.intra\.bmw12\.ch/g' ~/.kube/config
 ```
 
 # Laptop
