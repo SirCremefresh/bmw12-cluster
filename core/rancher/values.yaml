@@ -1,7 +1,0 @@
-replicas: 2
-tls: external
-
-ingress:
-  tls:
-    source: external
-#hostname: rancher.intra.bmw12.ch
