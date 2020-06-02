@@ -1,29 +1,3 @@
-postgresqlImage:
-  registry: docker.io
-  repository: bitnami/postgresql-repmgr
-  tag: 11.8.0-debian-10-r13
-  pullPolicy: IfNotPresent
-  debug: false
-
-pgpoolImage:
-  registry: docker.io
-  repository: bitnami/pgpool
-  tag: 4.1.2-debian-10-r5
-  pullPolicy: IfNotPresent
-  debug: false
-
-volumePermissionsImage:
-  registry: docker.io
-  repository: bitnami/minideb
-  tag: buster
-  pullPolicy: IfNotPresent
-
-metricsImage:
-  registry: docker.io
-  repository: bitnami/postgres-exporter
-  tag: 0.8.0-debian-10-r125
-  pullPolicy: IfNotPresent
-  debug: false
 
 postgresql:
   replicaCount: 2
@@ -82,48 +56,17 @@ networkPolicy:
   enabled: true
   allowExternal: true
 
-
-metrics:
-  enabled: false
-#  ## K8s Security Context
-#  ## https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
-#  ##
-#  securityContext:
-#    enabled: true
-#    runAsUser: 1001
 #
-#  ## Prometheus exporter containers' resource requests and limits
-#  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-#  ##
+#metrics:
+#  enabled: false
+#
 #  resources:
-#    # We usually recommend not to specify default resources and to leave this as a conscious
-#    # choice for the user. This also increases chances charts run on environments with little
-#    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-#    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-#    limits: {}
-#    #   cpu: 250m
-#    #   memory: 256Mi
-#    requests: {}
-#    #   cpu: 250m
-#    #   memory: 256Mi
-#
-#  ## Prometheus exporter container's liveness and readiness probes
-#  ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
-#  ##
-#  livenessProbe:
-#    enabled: true
-#    initialDelaySeconds: 30
-#    periodSeconds: 10
-#    timeoutSeconds: 5
-#    successThreshold: 1
-#    failureThreshold: 6
-#  readinessProbe:
-#    enabled: true
-#    initialDelaySeconds: 5
-#    periodSeconds: 10
-#    timeoutSeconds: 5
-#    successThreshold: 1
-#    failureThreshold: 6
+#    limits:
+#      cpu: 250m
+#      memory: 256Mi
+#    requests:
+#      cpu: 250m
+#      memory: 256Mi
 #
 #  ## Annotations for Prometheus exporter
 #  ##
@@ -135,25 +78,7 @@ metrics:
 #  ##
 #  serviceMonitor:
 #    enabled: false
-#    ## Specify a namespace if needed
-#    # namespace: monitoring
-#    # fallback to the prometheus default unless specified
-#    # interval: 10s
-#    # scrapeTimeout: 10s
-#    ## Defaults to what's used if you follow CoreOS [Prometheus Install Instructions](https://github.com/bitnami/charts/tree/master/bitnami/prometheus-operator#tldr)
-#    ## [Prometheus Selector Label](https://github.com/bitnami/charts/tree/master/bitnami/prometheus-operator#prometheus-operator-1)
-#    ## [Kube Prometheus Selector Label](https://github.com/bitnami/charts/tree/master/bitnami/prometheus-operator#exporters)
+#    namespace: monitoring
+#
 #    selector:
-#      prometheus: kube-prometheus
-#
-#    ## RelabelConfigs to apply to samples before scraping
-#    ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
-#    ## Value is evalued as a template
-#    ##
-#    relabelings: []
-#
-#    ## MetricRelabelConfigs to apply to samples before ingestion
-#    ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
-#    ## Value is evalued as a template
-#    ##
-#    metricRelabelings: []
+#      prometheus: prometheus-server

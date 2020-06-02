@@ -3,7 +3,10 @@ helm repo update
 
 
 kubectl create namespace postgresql
-helm install --namespace postgresql postgresql bitnami/postgresql-ha --values=values.yaml --version 3.2.7
+helm install --namespace postgresql postgresql bitnami/postgresql-ha --values=values.yaml --version 3.2.9
+
+
+helm upgrade --namespace postgresql postgresql bitnami/postgresql-ha --values=values.yaml --version 3.2.9
 
 #delete
 helm delete postgresql -n postgresql

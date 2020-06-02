@@ -10,6 +10,9 @@ spec:
   routes:
     - match: Host(`traefik.intra.bmw12.ch`)
       kind: Rule
+      middlewares:
+        - name: https-redirect
+          namespace: traefik
       services:
         - name: api@internal
           kind: TraefikService

@@ -10,6 +10,9 @@ spec:
   routes:
     - match: Host(`dashboard.intra.bmw12.ch`)
       kind: Rule
+      middlewares:
+        - name: https-redirect
+          namespace: traefik
       services:
         - name: kubernetes-dashboard
           port: 80

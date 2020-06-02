@@ -10,6 +10,11 @@ spec:
   routes:
     - match: Host(`longhorn.intra.bmw12.ch`)
       kind: Rule
+      middlewares:
+        - name: https-redirect
+          namespace: traefik
+        - name: cors-all
+          namespace: traefik
       services:
         - name: longhorn-frontend
           port: 80

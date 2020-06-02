@@ -82,6 +82,7 @@ etcdctl --endpoints=https://srv03.intra.bmw12.ch:2379 --cacert=/home/donato/etcd
 etcdctl --endpoints=https://srv01.intra.bmw12.ch:2379 --cacert=/home/donato/etcd-ca/srv01.pem --cert=/home/donato/etcd-ca/ca.pem --key=/home/donato/etcd-ca/ca-key.pem put /test hello
 etcdctl --endpoints=https://srv01.intra.bmw12.ch:2379 --cacert=/home/donato/etcd-ca/srv01.pem --cert=/home/donato/etcd-ca/ca.pem --key=/home/donato/etcd-ca/ca-key.pem get /test
 etcdctl --endpoints=https://srv01.intra.bmw12.ch:2379 --cacert=/home/donato/etcd-ca/srv01.pem --cert=/home/donato/etcd-ca/ca.pem --key=/home/donato/etcd-ca/ca-key.pem del /test
+etcdctl --endpoints=https://srv01.intra.bmw12.ch:2379 --cacert=/home/donato/etcd-ca/srv01.pem --cert=/home/donato/etcd-ca/ca.pem --key=/home/donato/etcd-ca/ca-key.pem check perf
 ```
 
 # run
