@@ -48,11 +48,15 @@ gpg --import private.key
 gpg --list-secret-keys
 
 # remove passphfrase from private local private key
-gpg --edit-key the_key_id
+gpg --edit-key bmw12
 passwd (enter current passphrase then enter nothing for new passphrase)
 CRT+C (to exit)
 
+# encrypt file
+gpg --encrypt --sign --armor -r bmw12 name_of_file
 
+# decrypt file
+gpg --decrypt -r bmw12 enrypted_file > output_file
 
 ```
 
