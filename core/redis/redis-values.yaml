@@ -1,0 +1,9 @@
+global:
+  storageClass: 'longhorn'
+
+master:
+  persistence:
+    size: 15Gi
+slave:
+  persistence:
+    size: 15Gi
