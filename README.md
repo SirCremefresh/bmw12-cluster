@@ -36,6 +36,26 @@ ssh bmw12@srv01.intra.bmw12.ch "sudo rm /home/bmw12/k3s-tmp"
 sed -i 's/127\.0\.0\.1/kubeapi\.intra\.bmw12\.ch/g' ~/.kube/config
 ```
 
+# Secrets
+https://makandracards.com/makandra-orga/37763-gpg-extract-private-key-and-import-on-different-machine
+https://www.howtogeek.com/427982/how-to-encrypt-and-decrypt-files-with-gpg-on-linux/
+
+```bash
+# import private key (private key is on google drive)
+gpg --import private.key
+
+# list keys
+gpg --list-secret-keys
+
+# remove passphfrase from private local private key
+gpg --edit-key the_key_id
+passwd (enter current passphrase then enter nothing for new passphrase)
+CRT+C (to exit)
+
+
+
+```
+
 # Laptop
 ## lid
 https://askubuntu.com/questions/141866/keep-ubuntu-server-running-on-a-laptop-with-the-lid-closed
