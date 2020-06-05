@@ -40,8 +40,9 @@ sed -i 's/127\.0\.0\.1/kubeapi\.intra\.bmw12\.ch/g' ~/.kube/config
 ## lid
 https://askubuntu.com/questions/141866/keep-ubuntu-server-running-on-a-laptop-with-the-lid-closed
 
-
-
+# restart node
+k drain srv03 --force --ignore-daemonsets --delete-local-data
+kubectl uncordon srv03
 
 # RPI help
 
