@@ -50,6 +50,7 @@ gpg --list-secret-keys
 # remove passphfrase from private local private key
 gpg --edit-key bmw12
 passwd (enter current passphrase then enter nothing for new passphrase)
+trust (then level 5)
 CRT+C (to exit)
 
 # encrypt file
