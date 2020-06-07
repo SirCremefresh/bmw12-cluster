@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: prod-bmw12-ch
+  namespace: ldap
+spec:
+  secretName: prod-bmw12-ch-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: cluster-issuer-letsencrypt-prod
+  dnsNames:
+    - 'bmw12.ch'
+    - '*.bmw12.ch'
+    - '*.intra.bmw12.ch'
+

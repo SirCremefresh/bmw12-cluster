@@ -3,3 +3,4 @@
 core/cert-manager/key.json
 *password.txt
 *.plain
+*.plain-yaml

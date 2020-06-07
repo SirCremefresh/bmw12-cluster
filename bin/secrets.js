@@ -40,11 +40,11 @@ function executeCommand(command) {
 	})
 }
 
-async function encryptAll() {
-	const plainFiles = searchRecursive(getProjectRoot(), '.plain');
+async function encryptAllPattern(plainEnding, encryptedEnding) {
+	const plainFiles = searchRecursive(getProjectRoot(), plainEnding);
 	for (const plainFile of plainFiles) {
 		const parsedFile = path.parse(plainFile);
-		const encryptedFile = path.join(parsedFile.dir, `${parsedFile.name}.encrypted`)
+		const encryptedFile = path.join(parsedFile.dir, `${parsedFile.name}${encryptedEnding}`)
 
 		try {
 			await executeCommand(`gpg --batch --yes --encrypt --sign --armor -r bmw12 --output ${encryptedFile} ${plainFile}`)
@@ -54,12 +54,12 @@ async function encryptAll() {
 	}
 }
 
-async function decryptAll() {
-	const encryptedFiles = searchRecursive(getProjectRoot(), '.encrypted');
+async function decryptAllPattern(encryptedEnding, plainEnding) {
+	const encryptedFiles = searchRecursive(getProjectRoot(), encryptedEnding);
 
 	for (const encryptedFile of encryptedFiles) {
 		const parsedFile = path.parse(encryptedFile);
-		const plainFile = path.join(parsedFile.dir, `${parsedFile.name}.plain`)
+		const plainFile = path.join(parsedFile.dir, `${parsedFile.name}${plainEnding}`)
 
 		try {
 			await executeCommand(`gpg --batch --yes --decrypt -r bmw12 --output ${plainFile} ${encryptedFile}`)
@@ -67,6 +67,16 @@ async function decryptAll() {
 			console.error(`could not decrypt file: ${plainFile}. error: ${e}`)
 		}
 	}
+}
+
+async function encryptAll() {
+	await encryptAllPattern('.plain', '.encrypted')
+	await encryptAllPattern('.plain-yaml', '.encrypted-yaml')
+}
+
+async function decryptAll() {
+	await decryptAllPattern('.encrypted', '.plain')
+	await decryptAllPattern('.encrypted-yaml', '.plain-yaml')
 }
 
 program
