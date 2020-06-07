@@ -1,0 +1,47 @@
+global:
+  hosts:
+    domain: intra.bmw12.ch
+    https: false
+    externalIP:
+    gitlab:
+      name: gitlab.intra.bmw12.ch
+      https: false
+    registry:
+      name: registry.intra.bmw12.ch
+      https: false
+    minio:
+      name: minio.intra.bmw12.ch
+      https: false
+  ingress:
+    configureCertmanager: false
+    enabled: false
+  psql:
+    host: pg.intra.bmw12.ch
+    port: 5432
+    database: gitlab_prod
+    username: postgres
+    password:
+      secret: gitlab-postgres
+      key: postgres-password
+
+  grafana:
+    enabled: false
+
+  edition: ce
+
+postgresql:
+  install: false
+
+redis:
+  cluster:
+    enabled: true
+
+gitlab-runner:
+  runners:
+    privileged: true
+
+certmanager:
+  install: false
+
+nginx-ingress:
+  enabled: false

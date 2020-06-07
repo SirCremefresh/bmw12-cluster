@@ -1,0 +1,43 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-gitlab-web
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`gitlab.intra.bmw12.ch`)
+      kind: Rule
+      middlewares:
+        - name: https-redirect
+          namespace: traefik
+      services:
+        - name: gitlab-webservice
+          port: 8080
+          namespace: gitlab
+  tls:
+    secretName: prod-bmw12-ch-tls
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-gitlab-registry
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`registry.intra.bmw12.ch`)
+      kind: Rule
+      middlewares:
+        - name: https-redirect
+          namespace: traefik
+      services:
+        - name: gitlab-registry
+          port: 5000
+          namespace: gitlab
+  tls:
+    secretName: prod-bmw12-ch-tls
