@@ -1,6 +1,5 @@
 replicaCount: 1
 
-
 # settings for enabling TLS
 tls:
   enabled: true
@@ -11,7 +10,7 @@ tls:
 service:
   ldapPort: 389
   sslLdapPort: 636
-  loadBalancerIP: ""
+  loadBalancerIP: "192.168.1.22"
   type: LoadBalancer
 
 # Default configuration for openldap as environment variables. These get injected directly in the container.
