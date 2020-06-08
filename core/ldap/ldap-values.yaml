@@ -17,7 +17,7 @@ service:
 # Use the env variables from https://github.com/osixia/docker-openldap#beginner-guide
 env:
   LDAP_ORGANISATION: "BMW12 Cluster"
-  LDAP_DOMAIN: "ldap.intra.bmw12.ch"
+  LDAP_DOMAIN: "bmw12.ch"
   LDAP_BACKEND: "mdb"
   LDAP_TLS: "true"
   LDAP_TLS_ENFORCE: "false"

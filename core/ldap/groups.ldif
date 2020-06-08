@@ -1,4 +1,4 @@
-dn: cn=database,ou=groups,dc=ldap,dc=intra,dc=bmw12,dc=ch
+dn: cn=database,ou=groups,dc=bmw12,dc=ch
 objectClass: top
 objectClass: posixGroup
 gidNumber: 678

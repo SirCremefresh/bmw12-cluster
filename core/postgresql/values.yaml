@@ -3,6 +3,8 @@ postgresql:
   replicaCount: 2
   updateStrategyType: RollingUpdate
 
+  pgHbaTrustAll: true
+
   resources:
     limits:
       cpu: 1500m
@@ -33,8 +35,18 @@ pgpool:
   adminUsername: admin
 
 
+##
 ldap:
-  enabled: false
+  enabled: true
+  ## Retrieve LDAP bindpw from existing secret
+  ##
+  # existingSecret: myExistingSecret
+  uri: ldap://ldap.intra.bmw12.ch:389
+  base: dc=bmw12\,dc=ch
+  binddn: cn=admin\,dc=bmw12\,dc=ch
+  bindpw: {pwd}
+  bslookup: ou=users\,dc=bmw12\,dc=ch
+  scope: sub
 
 persistence:
   enabled: true
@@ -42,12 +54,12 @@ persistence:
   accessModes:
     - ReadWriteOnce
 
-  size: 50Gi
+  size: 25Gi
 
 service:
   type: LoadBalancer
   port: 5432
-  loadBalancerIP: "192.168.1.21"
+  loadBalancerIP: "192.168.1.23"
 
 ingress:
   enabled: false

@@ -1,7 +1,7 @@
-dn: ou=users,dc=ldap,dc=intra,dc=bmw12,dc=ch
+dn: ou=users,dc=bmw12,dc=ch
 objectClass: organizationalUnit
 ou: users
 
-dn:  ou=groups,dc=ldap,dc=intra,dc=bmw12,dc=ch
+dn:  ou=groups,dc=bmw12,dc=ch
 objectClass: organizationalUnit
 ou: groups
