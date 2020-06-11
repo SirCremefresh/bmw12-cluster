@@ -1,6 +1,6 @@
 
 postgresql:
-  replicaCount: 1
+  replicaCount: 2
   updateStrategyType: RollingUpdate
 
   pgHbaTrustAll: true
@@ -17,10 +17,9 @@ postgresql:
     create: false
 
   username: postgres
-  password: donawo2000
 
 pgpool:
-  replicaCount: 1
+  replicaCount: 2
 
   resources:
     limits:
@@ -36,16 +35,10 @@ pgpool:
   adminUsername: admin
 
 
-##
 ldap:
   enabled: true
-  ## Retrieve LDAP bindpw from existing secret
-  ##
-  # existingSecret: myExistingSecret
   uri: ldap://ldap.intra.bmw12.ch
   base: dc=bmw12,dc=ch
-  binddn: cn=admin,dc=bmw12,dc=ch
-  bindpw:
   bslookup: ou=users,dc=bmw12,dc=ch
   scope: sub
   tls_reqcert: demand

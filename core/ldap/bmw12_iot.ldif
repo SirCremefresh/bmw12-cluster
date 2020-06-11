@@ -1,15 +1,16 @@
-dn: uid=bmw12_iot2,ou=users,dc=bmw12,dc=ch
+dn: uid=bmw12_iot,ou=users,dc=bmw12,dc=ch
 objectClass: top
 objectClass: account
 objectClass: shadowAccount
 objectClass: posixAccount
-uid: bmw12_iot2
-cn: bmw12_iot2
-uidNumber: 1206
-userPassword: {crypt}x
+uid: bmw12_iot
+cn: bmw12_iot
+uidNumber: 1205
 gidNumber: 100
-homeDirectory: /home/bmw12_iot2
+homeDirectory: /home/bmw12_iot
 loginShell: /bin/bash
-shadowLastChange: 0
-shadowMax: 0
-shadowWarning: 0
+
+dn: cn=database,ou=groups,dc=bmw12,dc=ch
+changetype: modify
+add: memberuid
+memberuid: bmw12_iot

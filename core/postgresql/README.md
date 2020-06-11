@@ -3,10 +3,16 @@ helm repo update
 
 
 kubectl create namespace postgresql2
-helm install --namespace postgresql2 postgresql2 bitnami/postgresql-ha --values=values.yaml --version 3.2.9
+helm install -n postgresql2 postgresql2 bitnami/postgresql-ha \
+    --values=postgresql-values.yaml \
+    --values=postgresql-values-passwords.plain-yaml \
+    --version 3.2.9
 
 
-helm upgrade --namespace postgresql postgresql bitnami/postgresql-ha --values=values.yaml --version 3.2.9
+helm upgrade -n postgresql2 postgresql2 bitnami/postgresql-ha \
+    --values=postgresql-values.yaml \
+    --values=postgresql-values-passwords.plain-yaml \
+    --version 3.2.9
 
 #delete
 helm delete postgresql -n postgresql
