@@ -27,5 +27,5 @@ ldapadd -x -H ldaps://ldap.intra.bmw12.ch:636 -D "cn=admin,dc=bmw12,dc=ch" -f gr
 ldapadd -x -H ldaps://ldap.intra.bmw12.ch:636 -D "cn=admin,dc=bmw12,dc=ch" -f bmw12_iot.ldif -w $LDAP_ADMIN_PASSWORD
 
 ## change and add password
-ldappasswd -x -H ldaps://ldap.intra.bmw12.ch:636 -D "cn=admin,dc=bmw12,dc=ch" -S "uid=bmw12_iot,ou=users,dc=bmw12,dc=ch"  -w $LDAP_ADMIN_PASSWORD
+ldappasswd -x -H ldaps://ldap.intra.bmw12.ch:636 -D "cn=admin,dc=bmw12,dc=ch" -S "uid=bmw12_iot2,ou=users,dc=bmw12,dc=ch"  -w $LDAP_ADMIN_PASSWORD
 

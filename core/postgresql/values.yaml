@@ -17,6 +17,7 @@ postgresql:
     create: false
 
   username: postgres
+  password: donawo2000
 
 pgpool:
   replicaCount: 1
@@ -47,7 +48,7 @@ ldap:
   bindpw:
   bslookup: ou=users,dc=bmw12,dc=ch
   scope: sub
-  tls_reqcert: never
+  tls_reqcert: demand
   nss_initgroups_ignoreusers: root,nslcd
 
 persistence:
