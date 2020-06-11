@@ -9,7 +9,5 @@ spec:
     kind: ClusterIssuer
     name: cluster-issuer-letsencrypt-prod
   dnsNames:
-    - 'bmw12.ch'
-    - '*.bmw12.ch'
-    - '*.intra.bmw12.ch'
+    - 'ldap.intra.bmw12.ch'
 

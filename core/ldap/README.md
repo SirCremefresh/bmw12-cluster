@@ -6,9 +6,12 @@ helm install -n ldap ldap stable/openldap --values ldap-values.yaml --values lda
 helm upgrade -n ldap ldap stable/openldap --values ldap-values.yaml --values ldap-values-passwords.plain-yaml
 
 
-export LDAP_ADMIN_PASSWORD= #ADMIN_PW
+helm uninstall -n ldap ldap
+
+
+export LDAP_ADMIN_PASSWORD=$(kubectl get secret --namespace ldap ldap-openldap -o jsonpath="{.data.LDAP_ADMIN_PASSWORD}" | base64 --decode; echo)
 # search all
-ldapsearch -x -H ldap://ldap.intra.bmw12.ch:389 -b dc=bmw12,dc=ch -D "cn=admin,dc=bmw12,dc=ch" -w $LDAP_ADMIN_PASSWORD
+ldapsearch -x -H ldap://ldap.intra.bmw12.ch:389 -b dc=bmw12,dc=ch -D "cn=admin,dc=ldap,dc=intra,dc=bmw12,dc=ch" -w $LDAP_ADMIN_PASSWORD
 
 
 ldapsearch -x -H ldap://ldap.intra.bmw12.ch:389 -b dc=bmw12,dc=ch -D "cn=admin,dc=bmw12,dc=ch" -w $LDAP_ADMIN_PASSWORD
@@ -25,3 +28,5 @@ ldapadd -x -H ldap://ldap.intra.bmw12.ch:389 -D "cn=admin,dc=bmw12,dc=ch" -f bmw
 
 ## change and add password
 ldappasswd -x -H ldap://ldap.intra.bmw12.ch:389 -D "cn=admin,dc=bmw12,dc=ch" -S "uid=bmw12_iot4,ou=users,dc=bmw12,dc=ch"  -w $LDAP_ADMIN_PASSWORD
+
+ldappasswd -x -H ldap://ldap.intra.bmw12.ch:389 -D "cn=admin,dc=bmw12,dc=ch" -S "cn=admin,dc=bmw12,dc=ch" 
