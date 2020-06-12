@@ -7,3 +7,6 @@ master:
 slave:
   persistence:
     size: 15Gi
+
+cluster:
+  slaveCount: 1

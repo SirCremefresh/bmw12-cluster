@@ -1,8 +1,6 @@
 global:
   hosts:
     domain: intra.bmw12.ch
-    https: false
-    externalIP:
     gitlab:
       name: gitlab.intra.bmw12.ch
       https: false
@@ -12,14 +10,17 @@ global:
     minio:
       name: minio.intra.bmw12.ch
       https: false
+
   ingress:
+    enabled: true
     configureCertmanager: false
-    enabled: false
+    class: traefik
+
   psql:
     host: pg.intra.bmw12.ch
     port: 5432
-    database: gitlab_prod
-    username: postgres
+    database: gitlab
+    username: gitlab
     password:
       secret: gitlab-postgres
       key: postgres-password
