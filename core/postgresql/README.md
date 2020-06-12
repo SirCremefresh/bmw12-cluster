@@ -2,8 +2,8 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 
 
-kubectl create namespace postgresql2
-helm install -n postgresql2 postgresql2 bitnami/postgresql-ha \
+kubectl create namespace postgresql
+helm install -n postgresql postgresql bitnami/postgresql-ha \
     --values=postgresql-values.yaml \
     --values=postgresql-values-passwords.plain-yaml \
     --version 3.2.9
