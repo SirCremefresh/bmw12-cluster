@@ -30,6 +30,13 @@ ldapadd -x -H ldaps://ldap.intra.bmw12.ch:636 -D "cn=admin,dc=bmw12,dc=ch" -f bm
 ldappasswd -x -H ldaps://ldap.intra.bmw12.ch:636 -D "cn=admin,dc=bmw12,dc=ch" -S "uid=bmw12_iot,ou=users,dc=bmw12,dc=ch"  -w $LDAP_ADMIN_PASSWORD
 
 
+# add gitlab user
+ldapadd -x -H ldaps://ldap.intra.bmw12.ch:636 -D "cn=admin,dc=bmw12,dc=ch" -f gitlab.ldif -w $LDAP_ADMIN_PASSWORD
+
+## change and add password gitlab
+ldappasswd -x -H ldaps://ldap.intra.bmw12.ch:636 -D "cn=admin,dc=bmw12,dc=ch" -S "uid=gitlab,ou=users,dc=bmw12,dc=ch"  -w $LDAP_ADMIN_PASSWORD
+
+
 # add donato user
 ldapadd -x -H ldaps://ldap.intra.bmw12.ch:636 -D "cn=admin,dc=bmw12,dc=ch" -f donato.ldif -w $LDAP_ADMIN_PASSWORD
 
