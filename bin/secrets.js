@@ -2,6 +2,7 @@ const program = require('commander');
 const fs = require('fs');
 const path = require('path');
 const {exec} = require('child_process');
+const gpg = require('gpg');
 
 function searchRecursive(dir, pattern) {
 	let results = [];
@@ -40,11 +41,32 @@ function executeCommand(command) {
 	})
 }
 
+async function decryptContent(encryptedContent) {
+	return new Promise((resolve, reject) => {
+		gpg.decrypt(encryptedContent, ['-r bmw12'], (error, buffer) => {
+			if (error)
+				reject(error);
+			else
+				resolve(buffer.toString());
+		})
+	});
+}
+
 async function encryptAllPattern(plainEnding, encryptedEnding) {
 	const plainFiles = searchRecursive(getProjectRoot(), plainEnding);
 	for (const plainFile of plainFiles) {
 		const parsedFile = path.parse(plainFile);
 		const encryptedFile = path.join(parsedFile.dir, `${parsedFile.name}${encryptedEnding}`)
+
+		const plainContent = fs.readFileSync(plainFile, 'utf8');
+		const plainContentFromEncryptedFile = await decryptContent(fs.readFileSync(encryptedFile, 'utf8'));
+
+		if (plainContent === plainContentFromEncryptedFile) {
+			console.log(`content not changed in file: ${plainFile}`);
+			continue;
+		} else {
+			console.log(`content changed in file: ${plainFile}`);
+		}
 
 		try {
 			await executeCommand(`gpg --batch --yes --encrypt --sign --armor -r bmw12 --output ${encryptedFile} ${plainFile}`)
