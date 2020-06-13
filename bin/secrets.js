@@ -59,7 +59,11 @@ async function encryptAllPattern(plainEnding, encryptedEnding) {
 		const encryptedFile = path.join(parsedFile.dir, `${parsedFile.name}${encryptedEnding}`)
 
 		const plainContent = fs.readFileSync(plainFile, 'utf8');
-		const plainContentFromEncryptedFile = await decryptContent(fs.readFileSync(encryptedFile, 'utf8'));
+
+		let plainContentFromEncryptedFile = '';
+		if (fs.existsSync(encryptedFile)) {
+			plainContentFromEncryptedFile = await decryptContent(fs.readFileSync(encryptedFile, 'utf8'));
+		}
 
 		if (plainContent === plainContentFromEncryptedFile) {
 			console.log(`content not changed in file: ${plainFile}`);
