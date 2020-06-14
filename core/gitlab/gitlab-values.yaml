@@ -1,6 +1,7 @@
 global:
   hosts:
     domain: intra.bmw12.ch
+    https: false
     gitlab:
       name: gitlab.intra.bmw12.ch
       https: false
@@ -15,6 +16,8 @@ global:
     enabled: true
     configureCertmanager: false
     class: traefik
+    tls:
+      enabled: false
 
   psql:
     host: pg.intra.bmw12.ch
@@ -25,6 +28,14 @@ global:
       secret: gitlab-postgres
       key: postgres-password
 
+  redis:
+    host: redis-master
+    password:
+      enabled: true
+      secret: redis
+      key: redis-password
+
+
   grafana:
     enabled: false
 
@@ -34,8 +45,8 @@ postgresql:
   install: false
 
 redis:
-  cluster:
-    enabled: true
+  install: false
+
 
 gitlab-runner:
   runners:
