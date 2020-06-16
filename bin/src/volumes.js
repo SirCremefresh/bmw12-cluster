@@ -1,4 +1,15 @@
 const fetch = require('node-fetch');
+const inquirer = require('inquirer');
+
+async function prompt(question) {
+	const {answer} = await inquirer.prompt([{
+		type: 'confirm',
+		name: 'answer',
+		message: question,
+		default: false
+	}]);
+	return answer;
+}
 
 async function cleanVolumes() {
 	const volumes = await fetch('https://longhorn.intra.bmw12.ch/v1/volumes', {method: 'GET'})
@@ -42,6 +53,19 @@ async function cleanVolumes() {
 	}
 }
 
+async function deleteVolume(volume) {
+	const answer = await prompt(`are you sure you want to delete the volume: ${volume}`)
+	if (answer === false) {
+		return;
+	}
+
+	await fetch(`https://longhorn.intra.bmw12.ch/v1/volumes/${volume}`,
+		{method: 'DELETE'}
+	)
+		.then(res => console.log(res))
+}
+
 module.exports = {
-	cleanVolumes
+	cleanVolumes,
+	deleteVolume
 }

@@ -2,7 +2,7 @@
 
 const program = require('commander');
 const {decryptAll, encryptAll} = require('./src/secrets');
-const {cleanVolumes} = require('./src/volumes');
+const {cleanVolumes, deleteVolume} = require('./src/volumes');
 
 
 program
@@ -35,5 +35,10 @@ volumesCommand
 	.command('clean')
 	.description('deletes stopped replicas')
 	.action(() => cleanVolumes())
+
+volumesCommand
+	.command('delete <volume>')
+	.description('delete volume')
+	.action((volume) => deleteVolume(volume))
 
 program.parse(process.argv)
