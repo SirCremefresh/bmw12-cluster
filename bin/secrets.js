@@ -1,4 +1,3 @@
-const program = require('commander');
 const fs = require('fs');
 const path = require('path');
 const {exec} = require('child_process');
@@ -105,20 +104,7 @@ async function decryptAll() {
 	await decryptAllPattern('.encrypted-yaml', '.plain-yaml')
 }
 
-program
-	.version('0.0.1')
-	.description('Commandline toll for encrypting and decrypting secrets')
-
-program
-	.command('encrypt')
-	.alias('e')
-	.description('Encrypt all the secrets')
-	.action(() => encryptAll());
-
-program
-	.command('decrypt')
-	.alias('d')
-	.description('decrypt all the secrets')
-	.action(() => decryptAll());
-
-program.parse(process.argv)
+module.exports = {
+	decryptAll,
+	encryptAll
+}

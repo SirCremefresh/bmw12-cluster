@@ -39,3 +39,7 @@ k delete -n postgresql sts  postgresql-postgresql-ha-postgresql
 
 copy statefulset definition from dashboard and change 
 podManagementPolicy to Parallel
+
+
+# local network
+https://gitlab.com/gitlab-org/gitlab-foss/-/issues/57948

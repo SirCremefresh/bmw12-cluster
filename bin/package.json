@@ -2,7 +2,10 @@
   "name": "bmw12-cluster-bin",
   "version": "1.0.0",
   "description": "",
-  "main": "",
+  "main": "./bmw12.js",
+  "bin": {
+    "bmw12": "./bmw12.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
