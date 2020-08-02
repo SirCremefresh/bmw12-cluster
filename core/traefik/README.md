@@ -10,7 +10,7 @@ kubectl create namespace traefik
 # install
 helm install --namespace=traefik --values=./custom-values.yaml traefik traefik/traefik
 # upgrade
-helm upgrade --namespace=traefik --values=./custom-values.yaml traefik traefik/traefik --version 8.2.1 
+helm upgrade --namespace=traefik --values=./custom-values.yaml traefik traefik/traefik --version 8.9.1
 # uninsall
 helm uninstall --namespace=traefik  traefik
 ```
