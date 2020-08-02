@@ -77,3 +77,7 @@ lxterminal --geometry=150x50 -e "htop"
 
 
 
+# evict and shit
+
+k drain srv03 --ignore-daemonsets --force --delete-local-data
+k uncordon srv02 

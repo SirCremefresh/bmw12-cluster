@@ -3,7 +3,7 @@
 https://rancher.com/docs/k3s/latest/en/installation/kube-dashboard/
 ## installl
 ```shell script
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/alternative.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.3/aio/deploy/alternative.yaml
 
 #deploy
 kubectl apply -f dashboard.admin-user.yml -f dashboard.admin-user-role.yml
