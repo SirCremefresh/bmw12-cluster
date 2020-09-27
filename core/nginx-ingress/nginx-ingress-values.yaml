@@ -1,3 +1,4 @@
+
 controller:
-  defaultTLS:
-    secret: "cert-manager/prod-certificat-tls"
+  extraArgs:
+    default-ssl-certificate: "cert-manager/prod-certificat-tls"
