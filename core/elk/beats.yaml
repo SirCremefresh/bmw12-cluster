@@ -4,7 +4,7 @@ metadata:
   name: filebeat
 spec:
   type: filebeat
-  version: 7.9.1
+  version: 7.9.2
   elasticsearchRef:
     name: quickstart
   kibanaRef:
@@ -22,8 +22,7 @@ spec:
                 paths:
                   - /var/log/containers/*${data.kubernetes.container.id}.log
     processors:
-      - add_cloud_metadata: {}
-      - add_host_metadata: {}
+      - add_host_metadata: { }
   daemonSet:
     podTemplate:
       spec:
@@ -31,13 +30,11 @@ spec:
         automountServiceAccountToken: true
         terminationGracePeriodSeconds: 30
         dnsPolicy: ClusterFirstWithHostNet
-        hostNetwork: true # Allows to provide richer host metadata
+        hostNetwork: true
         containers:
           - name: filebeat
             securityContext:
               runAsUser: 0
-              # If using Red Hat OpenShift uncomment this:
-              #privileged: true
             volumeMounts:
               - name: varlogcontainers
                 mountPath: /var/log/containers
@@ -66,7 +63,7 @@ kind: ClusterRole
 metadata:
   name: filebeat
 rules:
-  - apiGroups: [""] # "" indicates the core API group
+  - apiGroups: [ "" ]
     resources:
       - namespaces
       - pods
