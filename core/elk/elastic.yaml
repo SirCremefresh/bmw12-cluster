@@ -1,12 +1,17 @@
 apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
-  name: quickstart
+  name: elasticsearch
+  namespace: elk
 spec:
   version: 7.9.2
   nodeSets:
     - name: default
       count: 1
+      podTemplate:
+        spec:
+          nodeSelector:
+            kubernetes.io/hostname: srv01
       config:
         node.master: true
         node.data: true

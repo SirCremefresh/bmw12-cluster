@@ -8,5 +8,6 @@ https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-beat-configuration-exam
 
 
 k delete Elasticsearch quickstart
-k delete Beat quickstart
+k delete Beat filebeat
+k delete Beat metricbeat
 k delete Kibana quickstart
