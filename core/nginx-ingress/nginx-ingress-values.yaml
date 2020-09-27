@@ -1,0 +1,3 @@
+controller:
+  defaultTLS:
+    secret: "cert-manager/prod-certificat-tls"
