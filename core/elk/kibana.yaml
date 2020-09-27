@@ -8,6 +8,8 @@ spec:
   count: 1
   elasticsearchRef:
     name: elasticsearch
+  config:
+    xpack.security.enabled: false
   podTemplate:
     spec:
       containers:
@@ -17,7 +19,7 @@ spec:
               memory: 1Gi
               cpu: 0.5
             limits:
-              memory: 2Gi
+              memory: 3Gi
               cpu: 2
   http:
     tls:

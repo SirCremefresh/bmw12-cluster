@@ -13,6 +13,11 @@ spec:
         node.data: true
         node.ingest: true
         node.store.allow_mmap: true
+        xpack.security.authc:
+          anonymous:
+            username: anonymous
+            roles: superuser
+            authz_exception: false
       podTemplate:
         spec:
           nodeSelector:
@@ -36,3 +41,7 @@ spec:
              requests:
                storage: 40Gi
            storageClassName: "local-path"
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true

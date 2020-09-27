@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "True"
+  name: kibana-ingress
+  namespace: elk
+spec:
+  tls:
+    - hosts:
+        - kibana.intra.bmw12.ch
+  rules:
+    - host: kibana.intra.bmw12.ch
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: kibana-kb-http
+              servicePort: http
