@@ -1,12 +1,12 @@
 apiVersion: apm.k8s.elastic.co/v1
 kind: ApmServer
 metadata:
-  name: apm-server-quickstart
-  namespace: default
+  name: apm
+  namespace: elk
 spec:
   version: 7.9.2
   count: 1
   elasticsearchRef:
-    name: quickstart
+    name: elasticsearch
   kibanaRef:
-    name: quickstart
+    name: kibana
