@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: staging-certificat
+  name: prod-certificat
   namespace: cert-manager
 spec:
-  secretName: staging-certificat-tls
+  secretName: prod-certificat-tls
   issuerRef:
     kind: ClusterIssuer
-    name: cluster-issuer-letsencrypt-staging
+    name: cluster-issuer-letsencrypt-prod
   dnsNames:
     - 'bmw12.ch'
     - '*.bmw12.ch'
