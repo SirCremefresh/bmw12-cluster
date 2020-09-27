@@ -1,8 +1,8 @@
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: staging-bmw12-ch
-  namespace: traefik
+  namespace: nginx-ingress
 spec:
   secretName: staging-bmw12-ch-tls
   issuerRef:
@@ -14,11 +14,11 @@ spec:
     - '*.intra.bmw12.ch'
 
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: staging-sircremefresh-ch
-  namespace: traefik
+  namespace: nginx-ingress
 spec:
   secretName: staging-sircremefresh-ch-tls
   issuerRef:

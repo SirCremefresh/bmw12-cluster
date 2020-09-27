@@ -9,15 +9,3 @@
 # ConfigMap to use as the configuration. Helm will not manage the
 # contents of this ConfigMap, it is your responsibility to create it.
 existingConfigMap: metallb-config
-
-controller:
-  image:
-    repository: metallb/controller
-    tag: v0.9.3
-
-# speaker contains configuration specific to the MetalLB speaker
-# daemonset.
-speaker:
-  image:
-    repository: metallb/speaker
-    tag: v0.9.3

@@ -4,7 +4,7 @@
 ## Install
 ```bash
 # install on srv01
-curl -sfL https://get.k3s.io | sh -s - server --disable servicelb --disable traefik --no-deploy traefik --no-deploy servicelb --docker --datastore-endpoint="https://srv01.intra.bmw12.ch:2379,https://srv02.intra.bmw12.ch:2379,https://srv03.intra.bmw12.ch:2379" --datastore-cafile="/home/bmw12/etcd/keys/etcd-ca.crt" --datastore-certfile="/home/bmw12/etcd/keys/etcd-ca.crt" --datastore-keyfile="/home/bmw12/etcd/keys/ca-key.pem"
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s - server --disable servicelb --disable traefik --no-deploy traefik --no-deploy servicelb --docker
 # get token from master
 sudo cat /var/lib/rancher/k3s/server/node-token  
 
@@ -27,10 +27,7 @@ sudo snap install helm --classic
 
 
 # get config from server
-
-ssh bmw12@srv01.intra.bmw12.ch "sudo cp /etc/rancher/k3s/k3s.yaml /home/bmw12/k3s-tmp && sudo chown bmw12 /home/bmw12/k3s-tmp"
-scp bmw12@srv01.intra.bmw12.ch:/home/bmw12/k3s-tmp ~/.kube/config
-ssh bmw12@srv01.intra.bmw12.ch "sudo rm /home/bmw12/k3s-tmp"
+scp bmw12@srv01.intra.bmw12.ch:/etc/rancher/k3s/k3s.yaml ~/.kube/config
 
 # change localhost to dns
 sed -i 's/127\.0\.0\.1/kubeapi\.intra\.bmw12\.ch/g' ~/.kube/config
@@ -81,3 +78,7 @@ lxterminal --geometry=150x50 -e "htop"
 
 k drain srv03 --ignore-daemonsets --force --delete-local-data
 k uncordon srv02 
+
+
+
+docker stop $(docker ps -a -q --filter="name=k8s*")
