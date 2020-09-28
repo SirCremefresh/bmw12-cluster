@@ -17,10 +17,16 @@ spec:
           resources:
             requests:
               memory: 1Gi
-              cpu: 0.5
+              cpu: 1
             limits:
-              memory: 3Gi
+              memory: 4Gi
               cpu: 2
+              readinessProbe:
+          readinessProbe:
+            httpGet:
+              path: /app/home
+              port: 5601
+              scheme: HTTP
   http:
     tls:
       selfSignedCertificate:
