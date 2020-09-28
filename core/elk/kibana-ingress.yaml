@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "True"
+    kubernetes.io/ingress.class: "nginx"
   name: kibana-ingress
   namespace: elk
 spec:
@@ -11,6 +12,27 @@ spec:
         - kibana.intra.bmw12.ch
   rules:
     - host: kibana.intra.bmw12.ch
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: kibana-kb-http
+              servicePort: 5601
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "False"
+    kubernetes.io/ingress.class: "nginx-egress"
+  name: kibana-ingress-egress
+  namespace: elk
+spec:
+  tls:
+    - hosts:
+        - kibana.bmw12.ch
+  rules:
+    - host: kibana.bmw12.ch
       http:
         paths:
           - path: /
