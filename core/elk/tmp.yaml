@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2020-09-27T21:59:35Z"
+  labels:
+    common.k8s.elastic.co/type: kibana
+    kibana.k8s.elastic.co/name: kibana
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          .: {}
+          f:common.k8s.elastic.co/type: {}
+          f:kibana.k8s.elastic.co/name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"e48cd7fd-16d7-420d-9792-ba573529f780"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:ports:
+          .: {}
+          k:{"port":5601,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector:
+          .: {}
+          f:common.k8s.elastic.co/type: {}
+          f:kibana.k8s.elastic.co/name: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: elastic-operator
+    operation: Update
+    time: "2020-09-27T21:59:35Z"
+  name: kibana-kb-http
+  namespace: elk
+  ownerReferences:
+  - apiVersion: kibana.k8s.elastic.co/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Kibana
+    name: kibana
+    uid: e48cd7fd-16d7-420d-9792-ba573529f780
+  resourceVersion: "201910"
+  selfLink: /api/v1/namespaces/elk/services/kibana-kb-http
+  uid: c1c20d73-b512-4379-a7f9-21e684330211
+spec:
+  clusterIP: 10.43.240.130
+  ports:
+  - name: http
+    port: 5601
+    protocol: TCP
+    targetPort: 5601
+  selector:
+    common.k8s.elastic.co/type: kibana
+    kibana.k8s.elastic.co/name: kibana
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
