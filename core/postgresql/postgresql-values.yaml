@@ -1,92 +1,27 @@
+rbac:
+  create: false
 
-postgresql:
-  replicaCount: 2
-  updateStrategyType: RollingUpdate
+replication:
+  enabled: false
 
-  pgHbaTrustAll: true
-
-  resources:
-    limits:
-      cpu: 1500m
-      memory: 1512Mi
-    requests:
-      cpu: 250m
-      memory: 256Mi
-
-  pdb:
-    create: false
-
-  username: postgres
-
-pgpool:
-  replicaCount: 2
-
-  resources:
-    limits:
-      cpu: 1500m
-      memory: 1512Mi
-    requests:
-      cpu: 250m
-      memory: 256Mi
-
-  pdb:
-    create: false
-
-  adminUsername: admin
-
-
-ldap:
-  enabled: true
-  uri: ldap://ldap.intra.bmw12.ch
-  base: dc=bmw12,dc=ch
-  bslookup: ou=users,dc=bmw12,dc=ch
-  scope: sub
-  tls_reqcert: demand
-  nss_initgroups_ignoreusers: root,nslcd
-
-persistence:
-  enabled: true
-  storageClass: longhorn
-  accessModes:
-    - ReadWriteOnce
-
-  size: 50Gi
+image:
+  tag: 12.4.0
 
 service:
   type: LoadBalancer
   port: 5432
   loadBalancerIP: "192.168.1.21"
 
-ingress:
-  enabled: false
-
-networkPolicy:
+persistence:
   enabled: true
-  allowExternal: true
+  storageClass: "local-path"
+  accessModes:
+    - ReadWriteOnce
+  size: 80Gi
 
-#
-#metrics:
-#  enabled: false
-#
-#  resources:
-#    limits:
-#      cpu: 250m
-#      memory: 256Mi
-#    requests:
-#      cpu: 250m
-#      memory: 256Mi
-#
-#  ## Annotations for Prometheus exporter
-#  ##
-#  annotations:
-#    prometheus.io/scrape: "true"
-#    prometheus.io/port: "9187"
-#
-#  ## Enable this if you're using Prometheus Operator
-#  ##
-#  serviceMonitor:
-#    enabled: false
-#    namespace: monitoring
-#
-#    selector:
-#      prometheus: prometheus-server
+updateStrategy:
+  type: RollingUpdate
+
+master:
+  nodeSelector:
+    kubernetes.io/hostname: srv01
