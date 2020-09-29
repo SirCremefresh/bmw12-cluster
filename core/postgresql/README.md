@@ -9,7 +9,7 @@ helm install -n postgresql postgresql bitnami/postgresql \
     --version 9.8.1
 
 
-helm upgrade -n postgresql postgresql bitnami/postgresql-ha \
+helm upgrade -n postgresql postgresql bitnami/postgresql \
     -f=postgresql-values.yaml \
     -f=postgresql-values-passwords.plain-yaml \
     --version 9.8.1
