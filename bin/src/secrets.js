@@ -23,7 +23,7 @@ function searchRecursive(dir, pattern) {
 }
 
 function getProjectRoot() {
-	return path.join(__dirname, '..')
+	return path.join(__dirname, '../..')
 }
 
 function executeCommand(command) {
