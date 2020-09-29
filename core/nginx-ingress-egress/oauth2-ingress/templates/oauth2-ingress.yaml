@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: oauth2-proxy
+  namespace: nginx-ingress-egress
+  annotations:
+    kubernetes.io/ingress.class: "nginx-egress"
+spec:
+  rules:
+    {{- range .Values.domains }}
+    - host: {{ . }}
+      http:
+        paths:
+          - backend:
+              serviceName: oauth2-proxy
+              servicePort: 4180
+            path: /oauth2
+  {{- end }}
+  tls:
+    - hosts:
+        {{- range .Values.domains }}
+        - {{ . }}
+  {{- end }}

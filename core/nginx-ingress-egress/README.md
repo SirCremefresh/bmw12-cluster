@@ -15,4 +15,7 @@ kubectl create secret -n nginx-ingress-egress generic github-oauth-secret \
     --from-file=OAUTH2_PROXY_COOKIE_SECRET=./github-oauth-cookie-secret.plain \
     --dry-run=true -o yaml | kubectl apply -f -
 
-    
+
+# Oauth2 Ingresses
+helm install --namespace=nginx-ingress-egress oauth2-ingress ./oauth2-ingress
+helm upgrade --namespace=nginx-ingress-egress oauth2-ingress ./oauth2-ingress

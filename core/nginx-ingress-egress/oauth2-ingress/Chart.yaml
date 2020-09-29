@@ -1,0 +1,6 @@
+apiVersion: v2
+name: oauth2-ingress
+description: Helm for creating the oauth2 ingresses
+type: application
+version: 0.1.0
+appVersion: 0.1.0
