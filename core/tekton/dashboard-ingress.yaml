@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: tekton-dashboard
+  namespace: tekton-pipelines
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "True"
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+    - hosts:
+        - tekton.intra.bmw12.ch
+  rules:
+    - host: tekton.intra.bmw12.ch
+      http:
+        paths:
+          - backend:
+              serviceName: tekton-dashboard
+              servicePort: 9097
