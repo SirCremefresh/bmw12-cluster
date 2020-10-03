@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx-egress"
+  name: github-ingress-egress
+  namespace: tekton-pipelines
+spec:
+  tls:
+    - hosts:
+        - github-webhook.bmw12.ch
+  rules:
+    - host: github-webhook.bmw12.ch
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: el-github-listener-interceptor
+              servicePort: 8080
