@@ -82,3 +82,30 @@ k uncordon srv02
 
 
 docker stop $(docker ps -a -q --filter="name=k8s*")
+
+
+# Fix Golang kerne issue
+https://medium.com/@muhammadtriwibowo/set-permanently-ulimit-n-open-files-in-ubuntu-4d61064429a
+https://github.com/golang/go/issues/37436
+
+get limit with:
+ulimit -n
+
+
+add line to
+sudo vim /etc/sysctl.conf
+fs.file-max = 1048576
+reload with command
+sudo sysctl -p
+
+add following lines to it. The file was all commented out bevore
+sudo vim /etc/security/limits.conf
+
+* soft     nproc          1048576    
+* hard     nproc          1048576   
+* soft     nofile         1048576   
+* hard     nofile         1048576
+root soft     nproc          1048576    
+root hard     nproc          1048576   
+root soft     nofile         1048576   
+root hard     nofile         1048576
