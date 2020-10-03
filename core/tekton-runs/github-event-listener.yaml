@@ -12,10 +12,14 @@ spec:
             secretRef:
               secretName: github-secret
               secretKey: secretToken
-#            eventTypes:
-#              - pull_request
-#        - cel:
-#            filter: "body.action in ['opened', 'synchronize', 'reopened']"
+            eventTypes:
+              - push
+        - cel:
+            overlays:
+              - key: branch_name
+                expression: "body.ref.split('/')[2]"
+        - cel:
+            filter: "body.ref == 'refs/heads/master'"
       bindings:
         - ref: github-pr-binding
       template:
