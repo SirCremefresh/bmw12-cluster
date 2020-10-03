@@ -47,12 +47,16 @@ metadata:
 spec:
   params:
     - name: gitrepositoryurl
+    - name: commits
   resourcetemplates:
     - apiVersion: tekton.dev/v1alpha1
       kind: TaskRun
       metadata:
         generateName: github-run-
       spec:
+        params:
+          - name: commits
+            value: $(tt.params.commits)
         taskSpec:
           params:
             - name: commits
@@ -65,7 +69,7 @@ spec:
             - image: ubuntu
               script: |
                 #! /bin/bash
-                echo "$(tt.params.commits)"
+                echo "$(params.commits)"
                 echo "hello"
                 ls -al $(inputs.resources.source.path)
         inputs:
