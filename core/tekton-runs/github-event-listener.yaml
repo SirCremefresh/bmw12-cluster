@@ -35,6 +35,8 @@ spec:
   params:
     - name: gitrepositoryurl
       value: $(body.repository.clone_url)
+    - name: commits
+      value: $(body.commits)
 
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
@@ -52,6 +54,9 @@ spec:
         generateName: github-run-
       spec:
         taskSpec:
+          params:
+            - name: commits
+              type: string
           inputs:
             resources:
               - name: source
@@ -60,6 +65,8 @@ spec:
             - image: ubuntu
               script: |
                 #! /bin/bash
+                echo "$(tt.params.commits)"
+                echo "hello"
                 ls -al $(inputs.resources.source.path)
         inputs:
           resources:
