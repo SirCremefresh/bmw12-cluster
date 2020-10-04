@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "donatowolfisberg/sample-application-backend:5ccc465a4029a478bfec789cb625d880d94dfc15"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{.Values.images.backend.name}}:{{.Values.images.backend.tag}}"
+          imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 8080
