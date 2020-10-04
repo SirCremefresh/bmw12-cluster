@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-application-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-application-backend
+  template:
+    metadata:
+      labels:
+        app: sample-application-backend
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "donatowolfisberg/sample-application-backend:5ccc465a4029a478bfec789cb625d880d94dfc15"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
