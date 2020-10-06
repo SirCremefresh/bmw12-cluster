@@ -3,7 +3,8 @@ kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previou
 
 # Dashboard
 https://github.com/tektoncd/dashboard/blob/master/docs/install.md
-kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboard/latest/tekton-dashboard-release.yaml
+kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboard/v0.9.0/tekton-dashboard-release.yaml
+kubectl apply --filename https://github.com/tektoncd/dashboard/releases/download/v0.7.0/tekton-webhooks-extension-release.yaml
 
 # Triggers
 kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.8.1/release.yaml

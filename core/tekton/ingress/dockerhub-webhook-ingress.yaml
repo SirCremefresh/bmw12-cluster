@@ -3,17 +3,17 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx-egress"
-  name: docker-ingress-egress
+  name: dockerhub-ingress-egress
   namespace: tekton-pipelines
 spec:
   tls:
     - hosts:
-        - docker-webhook.bmw12.ch
+        - dockerhub-webhook.bmw12.ch
   rules:
-    - host: docker-webhook.bmw12.ch
+    - host: dockerhub-webhook.bmw12.ch
       http:
         paths:
           - path: /
             backend:
-              serviceName: el-docker-listener-interceptor
+              serviceName: el-dockerhub-listener-interceptor
               servicePort: 8080
