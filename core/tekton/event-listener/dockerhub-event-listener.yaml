@@ -7,6 +7,13 @@ metadata:
 spec:
   triggers:
     - name: dockerhub-listener
+      interceptors:
+        - webhook:
+            objectRef:
+              kind: Service
+              name: tekton-dockerhub-webhook
+              apiVersion: v1
+              namespace: tekton-dockerhub-webhook
       bindings:
         - ref: dockerhub-pr-binding
       template:
@@ -21,7 +28,7 @@ metadata:
 spec:
   params:
     - name: body
-      value: $(body.callback_url)
+      value: $(body)
 
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
