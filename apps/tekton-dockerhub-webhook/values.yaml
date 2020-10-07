@@ -3,6 +3,9 @@ images:
     name: ''
     tag: ''
 
+dockerHubSecret: ''
+
 apps:
   backend:
     name: 'tekton-dockerhub-webhook'
+    debug: 'true'

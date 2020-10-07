@@ -16,6 +16,11 @@ spec:
         - name: {{ .Values.apps.backend.name }}
           image: "{{.Values.images.backend.name}}:{{.Values.images.backend.tag}}"
           imagePullPolicy: IfNotPresent
+          env:
+            - name: DEBUG
+              value: {{.Values.apps.backend.debug | quote}}
+            - name: DOCKER_HUB_SECRET
+              value: {{.Values.dockerHubSecret | quote}}
           ports:
             - name: http
               containerPort: 8080

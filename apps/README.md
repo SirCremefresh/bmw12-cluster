@@ -4,4 +4,4 @@ kubectl -n tekton-dockerhub-webhook create secret docker-registry docker-registr
 kubectl -n tekton-dockerhub-webhook patch serviceaccount default -p '{"imagePullSecrets": [{"name": "docker-registry-credentials"}]}'
 
 
-helm upgrade --install -n tekton-dockerhub-webhook -f values.yaml -f bmw12-application.yaml tekton-dockerhub-webhook .
+helm upgrade --install -n tekton-dockerhub-webhook -f values.yaml -f bmw12-application.yaml -f secret-values.plain-yaml tekton-dockerhub-webhook .
