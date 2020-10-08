@@ -16,3 +16,8 @@ couldn't retrieve referenced input PipelineResource: pipelineresource.tekton.dev
 
 
 https://www.arthurkoziel.com/creating-ci-pipelines-with-tekton-part-2/
+
+
+
+kubectl -n tekton-pipelines create secret docker-registry docker-registry-credentials --docker-server=https://index.docker.io/v1/ --docker-username=donatowolfisberg --docker-password=pwd --docker-email=donato.wolfisberg@gmail.com
+kubectl -n tekton-pipelines patch serviceaccount default -p '{"imagePullSecrets": [{"name": "docker-registry-credentials"}]}'
