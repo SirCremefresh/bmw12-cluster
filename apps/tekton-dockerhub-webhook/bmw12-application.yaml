@@ -1,0 +1,6 @@
+name: tekton-dockerhub-webhook
+
+images:
+  backend:
+    name: donatowolfisberg/tekton-dockerhub-webhook
+    tag: 4dd0ec9377a9f1ffa011ffd9ba9f2a28c4491ce3

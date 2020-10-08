@@ -1,0 +1,6 @@
+name: sample-application
+
+images:
+  backend:
+    name: donatowolfisberg/sample-application-backend
+    tag: 5ccc465a4029a478bfec789cb625d880d94dfc15

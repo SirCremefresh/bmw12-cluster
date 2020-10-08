@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: extended-postgresql-config
+  namespace: postgresql
+data:
+  stat.conf: |
+    shared_preload_libraries = 'pg_stat_statements'
+    pg_stat_statements.track = all

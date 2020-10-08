@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.apps.backend.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.apps.backend.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.apps.backend.name }}
+    spec:
+      containers:
+        - name: {{ .Values.apps.backend.name }}
+          image: "{{.Values.images.backend.name}}:{{.Values.images.backend.tag}}"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DEBUG
+              value: {{.Values.apps.backend.debug | quote}}
+            - name: DOCKER_HUB_SECRET
+              value: {{.Values.dockerHubSecret | quote}}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP

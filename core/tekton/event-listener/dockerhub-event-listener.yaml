@@ -1,0 +1,60 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: dockerhub-listener-interceptor
+  namespace: tekton-pipelines
+spec:
+  triggers:
+    - name: dockerhub-listener
+      interceptors:
+        - webhook:
+            objectRef:
+              kind: Service
+              name: tekton-dockerhub-webhook
+              apiVersion: v1
+              namespace: tekton-dockerhub-webhook
+      bindings:
+        - ref: dockerhub-pr-binding
+      template:
+        name: dockerhub-template
+  serviceAccountName: tekton-triggers-example-minimal
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: dockerhub-pr-binding
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: body
+      value: $(body)
+
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: dockerhub-template
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: body
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1alpha1
+      kind: TaskRun
+      metadata:
+        generateName: dockerhub-run-
+      spec:
+        serviceAccountName: deploy-task-serviceaccount
+        params:
+          - name: body
+            value: $(tt.params.body)
+        taskSpec:
+          params:
+            - name: body
+              type: string
+          steps:
+            - image: ubuntu
+              script: |
+                #! /bin/bash
+                echo "$(params.body)"

@@ -1,0 +1,30 @@
+persistence:
+  defaultClass: false
+  defaultClassReplicaCount: 3
+
+defaultSettings:
+  backupTarget: s3://bmw12-longhorn@us-west-002/
+  backupTargetCredentialSecret: backblace-secret
+  autoSalvage: true
+
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+ingress:
+  enabled: true
+  host: longhorn.intra.bmw12.ch
+  tls: true
+  tlsSecret: ""
+
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "True"
+
+
+enablePSP: true

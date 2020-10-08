@@ -61,6 +61,22 @@ spec:
             - pod
             - container
             - volume
+        - module: postgresql
+          enabled: true
+          metricsets:
+            - database
+            - bgwriter
+            - activity
+            - statement
+          period: 10s
+
+          # The host must be passed as PostgreSQL URL. Example:
+          # postgres://localhost:5432?sslmode=disable
+          # The available parameters are documented here:
+          # https://godoc.org/github.com/lib/pq#hdr-Connection_String_Parameters
+          hosts: [ "postgres://192.168.1.21:5432?sslmode=disable" ]
+          username: donato
+          password: __pwd__
     processors:
       - add_cloud_metadata: {}
       - add_host_metadata: {}

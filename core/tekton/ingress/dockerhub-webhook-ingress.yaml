@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx-egress"
+  name: dockerhub-ingress-egress
+  namespace: tekton-pipelines
+spec:
+  tls:
+    - hosts:
+        - dockerhub-webhook.bmw12.ch
+  rules:
+    - host: dockerhub-webhook.bmw12.ch
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: el-dockerhub-listener-interceptor
+              servicePort: 8080
