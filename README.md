@@ -109,3 +109,6 @@ root soft     nproc          1048576
 root hard     nproc          1048576   
 root soft     nofile         1048576   
 root hard     nofile         1048576
+
+
+# If something is stuck terminating delete the finalizers
