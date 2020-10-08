@@ -1,29 +1,26 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: bmw12-image-updater-task-12
+  name: bmw12-image-updater-task-13
   namespace: tekton-pipelines
 spec:
-  #  params:
-  #    - name: callbackUrl
-  #      type: string
-  #    - name: repoUrl
-  #      type: string
-  #    - name: imageName
-  #      type: string
-  #    - name: tag
-  #      type: string
-  #    - name: name
-  #      type: string
-  #    - name: namespace
-  #      type: string
-  #    - name: owner
-  #      type: string
+  params:
+    - name: callbackUrl
+      type: string
+    - name: repoUrl
+      type: string
+    - name: imageName
+      type: string
+    - name: tag
+      type: string
+    - name: name
+      type: string
+    - name: namespace
+      type: string
+    - name: owner
+      type: string
   steps:
     - name: build
-      #      image: ubuntu
       image: donatowolfisberg/bmw12-image-updater:e5f040543c719b6dd9e9eb2499dd45d55b45c845
       command: [ "node", "/usr/src/app/dist/index.js" ]
-#      command: ["id"]
-#      args: ["--tag=some_tag"]
-#      args: [ "--callback-url=$(params.callbackUrl)", "--repo-url=$(params.repoUrl)", "--image-name=$(params.imageName)", "--tag=$(params.tag)", "--name=$(params.name)", "--namespace=$(params.namespace)", "--owner=$(params.owner)" ]
+      args: [ "--callback-url=$(params.callbackUrl)", "--repo-url=$(params.repoUrl)", "--image-name=$(params.imageName)", "--tag=$(params.tag)", "--name=$(params.name)", "--namespace=$(params.namespace)", "--owner=$(params.owner)" ]

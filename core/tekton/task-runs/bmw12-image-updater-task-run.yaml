@@ -1,23 +1,23 @@
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  name: bmw12-image-updater-task-run-12
+  name: bmw12-image-updater-task-run-13
   namespace: tekton-pipelines
 spec:
   taskRef:
-    name: bmw12-image-updater-task-12
-#  params:
-#    - name: callbackUrl
-#      value: https://hub.docker.com/callback
-#    - name: repoUrl
-#      value: https://hub.docker.com/repo
-#    - name: imageName
-#      value: namespace/name
-#    - name: tag
-#      value: some_tag
-#    - name: name
-#      value: some_name
-#    - name: namespace
-#      value: some_namespace
-#    - name: owner
-#      value: some_owner
+    name: bmw12-image-updater-task-13
+  params:
+    - name: callbackUrl
+      value: https://hub.docker.com/callback
+    - name: repoUrl
+      value: https://hub.docker.com/repo
+    - name: imageName
+      value: namespace/name
+    - name: tag
+      value: some_tag
+    - name: name
+      value: some_name
+    - name: namespace
+      value: some_namespace
+    - name: owner
+      value: some_owner
