@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: bmw12-image-updater-task-13
+  name: bmw12-image-updater-task
   namespace: tekton-pipelines
 spec:
   params:
