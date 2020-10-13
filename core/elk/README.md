@@ -13,3 +13,6 @@ k -n elk delete Elasticsearch elasticsearch
 k -n elk delete Beat filebeat
 k delete Beat metricbeat
 k -n elk delete Kibana kibana
+
+# Data & Disk
+The disk size and storage should be managed thourght lifeycle policies.
