@@ -36,22 +36,3 @@ resources:
 master:
   nodeSelector:
     kubernetes.io/hostname: srv01
-#  extraVolumeMounts:
-#    - name: postgresql-socket
-#      mountPath: /tmp/
-#
-#  sidecars:
-#    - name: pgbackrest
-#      image: donatowolfisberg/bmw12-pgbackrest:latest
-#      volumeMounts:
-#        - name: data
-#          mountPath: /bitnami/postgresql
-#        - name: postgresql-socket
-#          mountPath: /var/run/
-#
-#  extraVolumes:
-#    - name: postgresql-socket
-#      emptyDir: {}
-#
-##volumes:
-#
