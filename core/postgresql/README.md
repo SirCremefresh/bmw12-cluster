@@ -15,6 +15,12 @@ helm upgrade -n postgresql postgresql bitnami/postgresql \
     -f=postgresql-values.yaml \
     -f=postgresql-values-passwords.plain-yaml \
     --version 9.8.1
+    
+    
+helm template -n postgresql postgresql bitnami/postgresql \
+    -f=postgresql-values.yaml \
+    -f=postgresql-values-passwords.plain-yaml \
+    --version 9.8.1 > templated.yaml
 
 #delete
 helm delete postgresql -n postgresql
