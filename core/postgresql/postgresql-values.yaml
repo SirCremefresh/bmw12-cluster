@@ -4,9 +4,6 @@ rbac:
 replication:
   enabled: false
 
-image:
-  tag: 12.4.0
-
 service:
   type: LoadBalancer
   port: 5432
