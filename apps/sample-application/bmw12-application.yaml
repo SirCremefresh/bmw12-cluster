@@ -2,4 +2,4 @@ name: sample-application
 images:
   backend:
     name: donatowolfisberg/sample-application-backend
-    tag: testing_tag
+    tag: f81fecd4718fcd737ec06b6aaca9bbea898327f9
