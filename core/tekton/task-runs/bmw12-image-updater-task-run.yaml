@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  name: bmw12-image-updater-task-run-9
+  name: bmw12-image-updater-task-run-17
   namespace: tekton-pipelines
 spec:
   serviceAccountName: authenticated-serviceaccount
@@ -15,7 +15,7 @@ spec:
     - name: imageName
       value: donatowolfisberg/sample-application-backend
     - name: tag
-      value: 58bcc2168d74cc1388fc351fd8ec39f8fbc9a227
+      value: testing_tag
     - name: name
       value: some_name
     - name: namespace

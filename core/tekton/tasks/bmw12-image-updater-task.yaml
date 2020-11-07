@@ -26,8 +26,9 @@ spec:
         targetPath: chart-repo
   steps:
     - name: build
-      image: donatowolfisberg/bmw12-image-updater:1ea5b898cf5ba2801f132f8e6f0f0775cac8deeb
+      image: donatowolfisberg/bmw12-image-updater:b9dbf1c812b053b156d0506c227ed7bfd2dfa962
       command: [ "node", "/usr/src/app/dist/index.js" ]
+#      command: [ "sleep", "1000000" ]
       workingDir: "/workspace/chart-repo"
-      args: [ "--workspace-path=/workspace/chart-repo", "--callback-url=$(params.callbackUrl)", "--repo-url=$(params.repoUrl)", "--image-name=$(params.imageName)", "--tag=$(params.tag)", "--name=$(params.name)", "--namespace=$(params.namespace)", "--owner=$(params.owner)" ]
+      args: [ "--git-email=donato@wolfisberg.dev", "--git-name=BMW12-CICD", "--workspace-path=/workspace/chart-repo", "--callback-url=$(params.callbackUrl)", "--repo-url=$(params.repoUrl)", "--image-name=$(params.imageName)", "--tag=$(params.tag)", "--name=$(params.name)", "--namespace=$(params.namespace)", "--owner=$(params.owner)" ]
 
