@@ -54,7 +54,7 @@ spec:
       metadata:
         generateName: github-run-
       spec:
-        serviceAccountName: deploy-task-serviceaccount
+        serviceAccountName: authenticated-serviceaccount
         params:
           - name: commits
             value: $(tt.params.commits)

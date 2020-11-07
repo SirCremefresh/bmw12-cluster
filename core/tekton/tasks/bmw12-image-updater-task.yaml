@@ -19,8 +19,15 @@ spec:
       type: string
     - name: owner
       type: string
+  resources:
+    inputs:
+      - name: chart-repo
+        type: git
+        targetPath: chart-repo
   steps:
     - name: build
-      image: donatowolfisberg/bmw12-image-updater:e5f040543c719b6dd9e9eb2499dd45d55b45c845
+      image: donatowolfisberg/bmw12-image-updater:1ea5b898cf5ba2801f132f8e6f0f0775cac8deeb
       command: [ "node", "/usr/src/app/dist/index.js" ]
-      args: [ "--callback-url=$(params.callbackUrl)", "--repo-url=$(params.repoUrl)", "--image-name=$(params.imageName)", "--tag=$(params.tag)", "--name=$(params.name)", "--namespace=$(params.namespace)", "--owner=$(params.owner)" ]
+      workingDir: "/workspace/chart-repo"
+      args: [ "--workspace-path=/workspace/chart-repo", "--callback-url=$(params.callbackUrl)", "--repo-url=$(params.repoUrl)", "--image-name=$(params.imageName)", "--tag=$(params.tag)", "--name=$(params.name)", "--namespace=$(params.namespace)", "--owner=$(params.owner)" ]
+

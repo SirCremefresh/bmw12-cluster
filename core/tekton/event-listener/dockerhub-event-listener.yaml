@@ -45,7 +45,7 @@ spec:
       metadata:
         generateName: dockerhub-run-
       spec:
-        serviceAccountName: deploy-task-serviceaccount
+        serviceAccountName: authenticated-serviceaccount
         params:
           - name: body
             value: $(tt.params.body)

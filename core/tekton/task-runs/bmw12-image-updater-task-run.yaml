@@ -1,9 +1,10 @@
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  name: bmw12-image-updater-task-run
+  name: bmw12-image-updater-task-run-9
   namespace: tekton-pipelines
 spec:
+  serviceAccountName: authenticated-serviceaccount
   taskRef:
     name: bmw12-image-updater-task
   params:
@@ -12,12 +13,22 @@ spec:
     - name: repoUrl
       value: https://hub.docker.com/repo
     - name: imageName
-      value: namespace/name
+      value: donatowolfisberg/sample-application-backend
     - name: tag
-      value: some_tag
+      value: 58bcc2168d74cc1388fc351fd8ec39f8fbc9a227
     - name: name
       value: some_name
     - name: namespace
       value: some_namespace
     - name: owner
       value: some_owner
+  resources:
+    inputs:
+      - name: chart-repo
+        resourceSpec:
+          type: git
+          params:
+            - name: revision
+              value: master
+            - name: url
+              value: https://github.com/SirCremefresh/bmw12-cluster.git
