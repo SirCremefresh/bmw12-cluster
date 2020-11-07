@@ -14,6 +14,8 @@ spec:
               name: tekton-dockerhub-webhook
               apiVersion: v1
               namespace: tekton-dockerhub-webhook
+        - cel:
+            filter: "body.tag != \"latest\""
       bindings:
         - ref: dockerhub-pr-binding
       template:
@@ -28,19 +30,19 @@ metadata:
 spec:
   params:
     - name: callbackUrl
-      value: $(body)
+      value: $(body.callbackUrl)
     - name: repoUrl
-      value: $(body)
+      value: $(body.repoUrl)
     - name: imageName
-      value: $(body)
+      value: $(body.imageName)
     - name: tag
-      value: $(body)
+      value: $(body.tag)
     - name: name
-      value: $(body)
+      value: $(body.name)
     - name: namespace
-      value: $(body)
+      value: $(body.namespace)
     - name: owner
-      value: $(body)
+      value: $(body.owner)
 
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
