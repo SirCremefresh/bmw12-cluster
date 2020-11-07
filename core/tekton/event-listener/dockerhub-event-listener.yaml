@@ -18,7 +18,7 @@ spec:
         - ref: dockerhub-pr-binding
       template:
         name: dockerhub-template
-  serviceAccountName: tekton-triggers-example-minimal
+  serviceAccountName: tekton-trigger-service-account
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
@@ -27,7 +27,19 @@ metadata:
   namespace: tekton-pipelines
 spec:
   params:
-    - name: body
+    - name: callbackUrl
+      value: $(body)
+    - name: repoUrl
+      value: $(body)
+    - name: imageName
+      value: $(body)
+    - name: tag
+      value: $(body)
+    - name: name
+      value: $(body)
+    - name: namespace
+      value: $(body)
+    - name: owner
       value: $(body)
 
 ---
@@ -38,23 +50,46 @@ metadata:
   namespace: tekton-pipelines
 spec:
   params:
-    - name: body
+    - name: callbackUrl
+    - name: repoUrl
+    - name: imageName
+    - name: tag
+    - name: name
+    - name: namespace
+    - name: owner
   resourcetemplates:
-    - apiVersion: tekton.dev/v1alpha1
+    - apiVersion: tekton.dev/v1beta1
       kind: TaskRun
       metadata:
-        generateName: dockerhub-run-
+        generateName: bmw12-image-updater-task-run-
+        namespace: tekton-pipelines
       spec:
-        serviceAccountName: authenticated-serviceaccount
+        serviceAccountName: authenticated-service-account
+        taskRef:
+          name: bmw12-image-updater-task
         params:
-          - name: body
-            value: $(tt.params.body)
-        taskSpec:
-          params:
-            - name: body
-              type: string
-          steps:
-            - image: ubuntu
-              script: |
-                #! /bin/bash
-                echo "$(params.body)"
+          - name: callbackUrl
+            value: $(tt.params.callbackUrl)
+          - name: repoUrl
+            value: $(tt.params.repoUrl)
+          - name: imageName
+            value: $(tt.params.imageName)
+          - name: tag
+            value: $(tt.params.tag)
+          - name: name
+            value: $(tt.params.name)
+          - name: namespace
+            value: $(tt.params.namespace)
+          - name: owner
+            value: $(tt.params.owner)
+        resources:
+          inputs:
+            - name: chart-repo
+              resourceSpec:
+                type: git
+                params:
+                  - name: revision
+                    value: master
+                  - name: url
+                    value: https://github.com/SirCremefresh/bmw12-cluster.git
+

@@ -54,7 +54,7 @@ spec:
       metadata:
         generateName: github-run-
       spec:
-        serviceAccountName: authenticated-serviceaccount
+        serviceAccountName: authenticated-service-account
         params:
           - name: commits
             value: $(tt.params.commits)

@@ -4,7 +4,7 @@ metadata:
   name: bmw12-image-updater-task-run-17
   namespace: tekton-pipelines
 spec:
-  serviceAccountName: authenticated-serviceaccount
+  serviceAccountName: authenticated-service-account
   taskRef:
     name: bmw12-image-updater-task
   params:
