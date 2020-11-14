@@ -20,11 +20,13 @@ spec:
                 expression: "body.ref.split('/')[2]"
         - cel:
             filter: "body.ref == 'refs/heads/master'"
+        - cel:
+            filter: "repository.full_name == 'SirCremefresh/bmw12-cluster'"
       bindings:
         - ref: github-pr-binding
       template:
         name: github-template
-  serviceAccountName: tekton-triggers-example-minimal
+  serviceAccountName: tekton-trigger-service-account
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
@@ -49,30 +51,17 @@ spec:
     - name: gitrepositoryurl
     - name: commits
   resourcetemplates:
-    - apiVersion: tekton.dev/v1alpha1
+    - apiVersion: tekton.dev/v1beta1
       kind: TaskRun
       metadata:
-        generateName: github-run-
+        generateName: bmw12-deployer-
       spec:
         serviceAccountName: authenticated-service-account
+        taskRef:
+          name: bmw12-deployer-task
         params:
           - name: commits
             value: $(tt.params.commits)
-        taskSpec:
-          params:
-            - name: commits
-              type: string
-          inputs:
-            resources:
-              - name: source
-                type: git
-          steps:
-            - image: ubuntu
-              script: |
-                #! /bin/bash
-                echo "$(params.commits)"
-                echo "hello"
-                ls -al $(inputs.resources.source.path)
         inputs:
           resources:
             - name: source

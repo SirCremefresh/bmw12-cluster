@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: bmw12-deployer-task
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: commits
+      type: string
+  resources:
+    inputs:
+      - name: source
+        type: git
+        targetPath: chart-repo
+  steps:
+    - image: ubuntu
+      script: |
+        #! /bin/bash
+        echo "$(params.commits)"
+        echo "hello"
+        ls -al $(inputs.resources.source.path)
