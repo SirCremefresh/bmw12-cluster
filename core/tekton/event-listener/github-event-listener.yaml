@@ -37,8 +37,10 @@ spec:
   params:
     - name: gitrepositoryurl
       value: $(body.repository.clone_url)
-    - name: commits
-      value: $(body.commits)
+    - name: before
+      value: $(body.before)
+    - name: after
+      value: $(body.after)
 
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
@@ -49,7 +51,8 @@ metadata:
 spec:
   params:
     - name: gitrepositoryurl
-    - name: commits
+    - name: before
+    - name: after
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: TaskRun
@@ -61,15 +64,7 @@ spec:
         taskRef:
           name: bmw12-deployer-task
         params:
-          - name: commits
-            value: $(tt.params.commits)
-        resources:
-          inputs:
-            - name: source
-              resourceSpec:
-                type: git
-                params:
-                  - name: revision
-                    value: master
-                  - name: url
-                    value: $(tt.params.gitrepositoryurl)
+          - name: after
+            value: $(tt.params.after)
+          - name: before
+            value: $(tt.params.before)

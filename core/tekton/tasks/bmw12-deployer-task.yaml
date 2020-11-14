@@ -5,18 +5,24 @@ metadata:
   namespace: tekton-pipelines
 spec:
   params:
-    - name: commits
+    - name: after
       type: string
-  resources:
-    inputs:
-      - name: source
-        type: git
-        targetPath: chart-repo
+    - name: before
+      type: string
   steps:
-    - image: donatowolfisberg/bmw12-tekton-base-image:ea2c8205e235b0000e2a6857060a40297f3b8dc8
+    - image: donatowolfisberg/bmw12-tekton-base-image:8dd70fafef4b67f046375f0d1abdf31a03bb4ace
+      workingDir: "/workspace"
       script: |
         #! /bin/bash
-        echo "$(params.commits)"
-        echo "$(params.commits)" | jq ".commits[].modified|.[]"
+        pwd
+        echo "start cloning"
+        git clone https://github.com/SirCremefresh/bmw12-cluster.git
+        if [ $? -ne 0 ]; then
+          echo "Could not clone repository" 1>&2
+          exit 2
+        fi
+        cd bmw12-cluster
+        echo "$(params.before)"
+        echo "$(params.after)"
+        git diff --name-only "$(params.before)" "$(params.after)" | cat
         echo "hello"
-        ls -al $(inputs.resources.source.path)
