@@ -14,15 +14,11 @@ spec:
       workingDir: "/workspace"
       script: |
         #! /bin/bash
-        pwd
-        echo "start cloning"
         git clone https://github.com/SirCremefresh/bmw12-cluster.git
         if [ $? -ne 0 ]; then
           echo "Could not clone repository" 1>&2
           exit 2
         fi
         cd bmw12-cluster
-        echo "$(params.before)"
-        echo "$(params.after)"
+        
         git diff --name-only "$(params.before)" "$(params.after)" | cat
-        echo "hello"
