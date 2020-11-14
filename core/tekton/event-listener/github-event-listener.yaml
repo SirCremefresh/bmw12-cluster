@@ -21,7 +21,7 @@ spec:
         - cel:
             filter: "body.ref == 'refs/heads/master'"
         - cel:
-            filter: "repository.full_name == 'SirCremefresh/bmw12-cluster'"
+            filter: "body.repository.full_name == 'SirCremefresh/bmw12-cluster'"
       bindings:
         - ref: github-pr-binding
       template:
@@ -55,6 +55,7 @@ spec:
       kind: TaskRun
       metadata:
         generateName: bmw12-deployer-
+        namespace: tekton-pipelines
       spec:
         serviceAccountName: authenticated-service-account
         taskRef:
@@ -62,8 +63,8 @@ spec:
         params:
           - name: commits
             value: $(tt.params.commits)
-        inputs:
-          resources:
+        resources:
+          inputs:
             - name: source
               resourceSpec:
                 type: git

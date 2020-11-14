@@ -13,9 +13,10 @@ spec:
         type: git
         targetPath: chart-repo
   steps:
-    - image: ubuntu
+    - image: donatowolfisberg/bmw12-tekton-base-image:ea2c8205e235b0000e2a6857060a40297f3b8dc8
       script: |
         #! /bin/bash
         echo "$(params.commits)"
+        echo "$(params.commits)" | jq ".commits[].modified|.[]"
         echo "hello"
         ls -al $(inputs.resources.source.path)
