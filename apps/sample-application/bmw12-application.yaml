@@ -3,7 +3,7 @@ namespace: sample-application
 images:
   backend:
     name: donatowolfisberg/sample-application-backend
-    tag: 573568205467998a0184b16774baa55fb7f3f494
+    tag: 33ace57a799c38af4e654d185cba3aaabcee155c
 secrets:
   - secret-values.encrypted-yaml
 values:
