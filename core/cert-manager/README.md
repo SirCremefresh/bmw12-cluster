@@ -8,13 +8,13 @@ helm repo update
 helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
-  --version v1.0.3 \
+  --version v1.0.4 \
   --set installCRDs=true
 
 helm upgrade \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
-  --version v1.0.3 \
+  --version v1.0.4 \
   --set installCRDs=true
 
 ```
