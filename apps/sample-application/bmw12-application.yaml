@@ -3,6 +3,6 @@ namespace: sample-application
 images:
   backend:
     name: donatowolfisberg/sample-application-backend
-    tag: 33ace57a799c38af4e654d185cba3aaabcee155c
+    tag: 95f4f674795cab5629ecb5fe32b88fd318203d78
 values:
   - values.yaml
