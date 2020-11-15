@@ -8,5 +8,5 @@ images:
 apps:
   backend:
     name: sample-application-backend
-    replicas: 4
+    replicas: 1
     servicePort: 80
