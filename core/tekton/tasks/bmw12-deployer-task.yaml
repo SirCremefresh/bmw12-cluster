@@ -10,8 +10,18 @@ spec:
     - name: before
       type: string
   steps:
-    - image: donatowolfisberg/bmw12-tekton-base-image:8dd70fafef4b67f046375f0d1abdf31a03bb4ace
+    - image: donatowolfisberg/bmw12-tekton-base-image:ea938fb943edc9f8f0b8e6d1d33e30b1d7042416
       workingDir: "/workspace"
+      env:
+        - name: PASSPHRASE
+          valueFrom:
+            secretKeyRef:
+              name: gpg-private-key
+              key: passphrase.txt
+      volumeMounts:
+        - name: private-key
+          mountPath: "/workspace/private-key"
+          readOnly: true
       script: |
         #! /bin/bash
         git clone https://github.com/SirCremefresh/bmw12-cluster.git
@@ -20,5 +30,88 @@ spec:
           exit 2
         fi
         cd bmw12-cluster
-        
-        git diff --name-only "$(params.before)" "$(params.after)" | cat
+
+        changedProjects=$(
+          git diff --name-only "$(params.before)" "$(params.after)" |
+            grep -e '^apps' |
+            awk -F'/' '{print $2}' |
+            sort |
+            uniq
+        )
+
+
+        secretsLoaded="false"
+        function load_private_key() {
+          if [ "${secretsLoaded}" == "false" ]; then
+            echo "load_private_key"
+            gpg --batch --import /workspace/private-key/private.key
+            secretsLoaded="true"
+          fi
+        }
+
+        function decrypt_secrets() {
+          secretFiles=$1
+          for secretFile in $secretFiles; do
+            echo "Decrypting file: ${secretFile}"
+            echo "${PASSPHRASE}" | PASSPHRASE="${PASSPHRASE}" gpg --batch \
+            --pinentry-mode loopback --command-fd 0 -r donato@wolfisberg.dev \
+            -d "${secretFile}" > "${secretFile}.plain-yaml"
+
+            if [ $? -ne 0 ]; then
+              echo "Could not decrypt secret. file: ${secretFile}" 1>&2
+              exit 4
+            fi
+          done
+        }
+
+        function apply_project() {
+          project=$1
+          echo "Working on $project"
+
+          if ! cd "apps/${project}"; then
+            echo "Project does not exist"
+            return
+          fi
+
+          bmw12ApplicationJson=$(yq r --tojson bmw12-application.yaml)
+
+          namespace=$(echo "${bmw12ApplicationJson}" | jq --raw-output ".name")
+          valuesFiles=()
+
+          values=$(echo "${bmw12ApplicationJson}" | jq ".values")
+          if [ "${values}" != "null" ]; then
+            valuesFiles+=("$(echo "${values}" | jq --raw-output ".[]")")
+          fi
+
+          valuesFiles+=(bmw12-application.yaml)
+
+          secrets=$(echo "${bmw12ApplicationJson}" | jq ".secrets")
+          if [ "${secrets}" != "null" ]; then
+            load_private_key
+            echo "Decrypting Secrets"
+            secretFiles=$(echo "${secrets}" | jq --raw-output ".[]")
+            decrypt_secrets "${secretFiles}"
+            valuesFiles+=("$(echo "${secretFiles}" | awk '{print $1".plain-yaml"}')")
+          fi
+
+          valuesFilesArgument=""
+          for valuesFile in "${valuesFiles[@]::${#valuesFiles[@]}-1}"; do
+            valuesFilesArgument+="-f ${valuesFile} "
+          done
+          valuesFilesArgument+="-f ${valuesFiles[-1]}"
+
+          eval "helm upgrade --install -n ${namespace} ${valuesFilesArgument} ${project} ."
+
+          cd "../../"
+        }
+
+        for project in $changedProjects; do
+          apply_project "${project}"
+        done
+  volumes:
+    - name: private-key
+      secret:
+        secretName: gpg-private-key
+        items:
+          - key: private.key
+            path: private.key

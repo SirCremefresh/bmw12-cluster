@@ -60,7 +60,7 @@ spec:
         generateName: bmw12-deployer-
         namespace: tekton-pipelines
       spec:
-        serviceAccountName: authenticated-service-account
+        serviceAccountName: cluster-admin-service-account
         taskRef:
           name: bmw12-deployer-task
         params:
