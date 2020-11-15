@@ -4,3 +4,9 @@ images:
   backend:
     name: donatowolfisberg/sample-application-backend
     tag: ''
+
+apps:
+  backend:
+    name: sample-application-backend
+    replicas: 2
+    servicePort: 80
