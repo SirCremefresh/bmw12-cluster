@@ -9,3 +9,4 @@ apps:
   backend:
     name: 'tekton-dockerhub-webhook'
     debug: 'true'
+    servicePort: 80
