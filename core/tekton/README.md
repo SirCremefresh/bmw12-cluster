@@ -23,6 +23,10 @@ kubectl -n tekton-pipelines create secret docker-registry docker-registry-creden
 kubectl -n tekton-pipelines patch serviceaccount default -p '{"imagePullSecrets": [{"name": "docker-registry-credentials"}]}'
 
 
+kubectl -n tekton-pipelines create secret generic gpg-private-key \
+  --from-file=private.key=./secrets/private-key.plain \
+  --from-file=passphrase.txt=./secrets/private-key-passphrase.plain
+
 
 
 # delete all task runs
