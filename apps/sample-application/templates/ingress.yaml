@@ -14,5 +14,5 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: sample-application-backend
+              serviceName: {{ .Values.name }}-backend
               servicePort: 8080

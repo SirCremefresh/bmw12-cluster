@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample-application-backend
+  name: {{ .Values.name }}-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sample-application-backend
+      app: {{ .Values.name }}-backend
   template:
     metadata:
       labels:
-        app: sample-application-backend
+        app: {{ .Values.name }}-backend
     spec:
       containers:
         - name: {{ .Chart.Name }}

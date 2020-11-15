@@ -1,3 +1,4 @@
+name: sample-application
 
 images:
   backend:
