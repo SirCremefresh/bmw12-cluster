@@ -4,7 +4,5 @@ images:
   backend:
     name: donatowolfisberg/sample-application-backend
     tag: 70f082681e448123ee0ea41177be38e4d4a8a435
-secrets:
-  - secret-values.encrypted-yaml
 values:
   - values.yaml
