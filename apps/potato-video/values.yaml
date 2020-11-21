@@ -18,4 +18,4 @@ apps:
       databaseSecret: 'potato-video-database-secret'
     ingress:
       class: nginx-egress
-      url: potato-video.bmw12.ch
+      url: potato-video-ctf.bmw12.ch
