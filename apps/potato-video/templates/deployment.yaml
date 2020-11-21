@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.apps.backend.name }}
+spec:
+  replicas: {{ .Values.apps.backend.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.apps.backend.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.apps.backend.name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{.Values.images.backend.name}}:{{.Values.images.backend.tag}}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: PRODUCTION
+              value: "true"
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.apps.backend.database.databaseSecret }}
+                  key: DATABASE_PASSWORD
+            - name: DATABASE_USER
+              value: {{ .Values.apps.backend.database.user | quote }}
+            - name: DATABASE_PORT
+              value: {{ .Values.apps.backend.database.port | quote }}
+            - name: DATABASE_HOST
+              value: {{ .Values.apps.backend.database.host | quote }}
+

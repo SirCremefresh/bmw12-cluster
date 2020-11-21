@@ -1,0 +1,21 @@
+name: potato-video
+
+images:
+  backend:
+    name: donatowolfisberg/potato-video
+    tag: ''
+
+apps:
+  backend:
+    name: potato-video-backend
+    replicas: 1
+    servicePort: 8080
+    database:
+      user: 'donato'
+      host: 'pg.intra.bmw12.ch'
+      port: '5432'
+      password: ''
+      databaseSecret: 'potato-video-database-secret'
+    ingress:
+      class: nginx-egress
+      url: potato-video.bmw12.ch
