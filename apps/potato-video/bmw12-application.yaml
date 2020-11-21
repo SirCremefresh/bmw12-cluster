@@ -3,7 +3,7 @@ namespace: potato-video
 images:
   backend:
     name: donatowolfisberg/potato-video
-    tag: 3fe8277304bbbb42bc2a3042693e12c9755dc40d
+    tag: a4b1086915e86e60960d347c1ad7d94e9449ed73
 secrets:
   - database-secrets.encrypted-yaml
 values:
