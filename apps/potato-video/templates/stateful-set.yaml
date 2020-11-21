@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Values.apps.backend.name }}
 spec:
@@ -12,6 +12,8 @@ spec:
       labels:
         app: {{ .Values.apps.backend.name }}
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: srv01
       containers:
         - name: {{ .Chart.Name }}
           image: "{{.Values.images.backend.name}}:{{.Values.images.backend.tag}}"
@@ -34,4 +36,15 @@ spec:
               value: {{ .Values.apps.backend.database.port | quote }}
             - name: DATABASE_HOST
               value: {{ .Values.apps.backend.database.host | quote }}
-
+          volumeMounts:
+            - name: videos
+              mountPath: /tmp/videos
+  volumeClaimTemplates:
+    - metadata:
+        name: videos
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "local-path"
+        resources:
+          requests:
+            storage: 50Gi
