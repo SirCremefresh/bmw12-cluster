@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.apps.backend.name }}
 spec:
   replicas: {{ .Values.apps.backend.replicas }}
+  serviceName: {{ .Values.apps.backend.name }}
   selector:
     matchLabels:
       app: {{ .Values.apps.backend.name }}
