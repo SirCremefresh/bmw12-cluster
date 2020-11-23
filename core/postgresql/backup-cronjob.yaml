@@ -2,6 +2,7 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: bmw12-simple-postgresql-backup
+  namespace: postgresql
 spec:
   schedule: "0 3 * * *"
   jobTemplate:
@@ -19,7 +20,7 @@ spec:
                 - name: BUCKET_NAME
                   value: bmw12-postgresql
                 - name: PG_DATABASES
-                  value: "donato"
+                  value: "donato,potato_video"
               envFrom:
                 - secretRef:
                     name: bmw12-simple-postgresql-backup-secrets

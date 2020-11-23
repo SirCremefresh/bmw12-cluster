@@ -27,7 +27,9 @@ k apply -n postgresql -f backup-secret.plain-yaml
 k apply -n postgresql -f backup-cronjob.yaml
 
 #manualy trigger
-k -n postgresql create job --from=cronjob/bmw12-simple-postgresql-backup bmw12-simple-postgresql-backup-manually
+k -n postgresql create job \
+    --from=cronjob/bmw12-simple-postgresql-backup \
+    bmw12-simple-postgresql-backup-manually
 
 #delete
 helm delete postgresql -n postgresql
