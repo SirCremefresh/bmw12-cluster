@@ -1,6 +1,5 @@
 name: potato-video
 
-
 images:
   backend:
     name: donatowolfisberg/potato-video
