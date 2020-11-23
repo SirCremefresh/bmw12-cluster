@@ -91,7 +91,9 @@ spec:
             echo "Decrypting Secrets"
             secretFiles=$(echo "${secrets}" | jq --raw-output ".[]")
             decrypt_secrets "${secretFiles}"
-            valuesFiles+=("$(echo "${secretFiles}" | awk '{print $1".plain-yaml"}')")
+              for secretFile in $secretFiles; do
+              valuesFiles+=("${secretFile}.plain-yaml")
+            done
           fi
 
           valuesFilesArgument=""
@@ -99,6 +101,11 @@ spec:
             valuesFilesArgument+="-f ${valuesFile} "
           done
           valuesFilesArgument+="-f ${valuesFiles[-1]}"
+
+          echo "Project: ${project}"
+          echo "Namespace: ${namespace}"
+          echo "Value Files: ${valuesFilesArgument}"
+          echo "Helm Command: helm upgrade --install -n ${namespace} ${valuesFilesArgument} ${project} ."
 
           eval "helm upgrade --install -n ${namespace} ${valuesFilesArgument} ${project} ."
 
