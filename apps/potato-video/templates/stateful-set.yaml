@@ -16,7 +16,7 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: srv01
       containers:
-        - name: {{ .Chart.Name }}-container
+        - name: {{ .Chart.Name }}
           image: "{{.Values.images.backend.name}}:{{.Values.images.backend.tag}}"
           imagePullPolicy: IfNotPresent
           ports:
