@@ -11,7 +11,7 @@ apps:
     replicas: 1
     servicePort: 8080
     database:
-      user: 'donato'
+      user: 'potato_video'
       host: 'pg.intra.bmw12.ch'
       port: '5432'
       password: ''
