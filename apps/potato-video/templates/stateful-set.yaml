@@ -45,8 +45,8 @@ spec:
               readOnly: true
       volumes:
         - name: ctf-flag
-          configMap:
-            name: {{ .Values.apps.backend.ctf.ctfSecret }}
+          secret:
+            secretName: {{ .Values.apps.backend.ctf.ctfSecret }}
   volumeClaimTemplates:
     - metadata:
         name: videos
