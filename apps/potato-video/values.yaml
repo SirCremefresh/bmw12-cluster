@@ -16,6 +16,9 @@ apps:
       port: '5432'
       password: ''
       databaseSecret: 'potato-video-database-secret'
+    ctf:
+      ctfSecret: 'potato-video-ctf-secret'
+      flag: ''
     ingress:
       class: nginx
       url: potato-video-ctf.intra.bmw12.ch

@@ -40,6 +40,13 @@ spec:
           volumeMounts:
             - name: videos
               mountPath: /tmp/videos
+            - name: ctfFlag
+              mountPath: /root/flag
+              readOnly: true
+      volumes:
+        - name: ctfFlag
+          configMap:
+            name: {{ .Values.apps.backend.ctf.ctfSecret }}
   volumeClaimTemplates:
     - metadata:
         name: videos

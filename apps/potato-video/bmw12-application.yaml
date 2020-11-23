@@ -6,5 +6,6 @@ images:
     tag: d8da8306a02e17f6bb15da197fe57e14ba5a915c
 secrets:
   - database-secrets.encrypted-yaml
+  - ctf-secrets.encrypted-yaml
 values:
   - values.yaml
