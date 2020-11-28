@@ -7,20 +7,20 @@ k apply -f extended-postgresql-config.yaml
 helm install -n postgresql postgresql bitnami/postgresql \
     -f=postgresql-values.yaml \
     -f=postgresql-values-passwords.plain-yaml \
-    --version 9.8.4
+    --version 10.1.1
 
 CREATE EXTENSION pg_stat_statements;
 
 helm upgrade -n postgresql postgresql bitnami/postgresql \
     -f=postgresql-values.yaml \
     -f=postgresql-values-passwords.plain-yaml \
-    --version 9.8.4
+    --version 10.1.1
     
     
 helm template -n postgresql postgresql bitnami/postgresql \
     -f=postgresql-values.yaml \
     -f=postgresql-values-passwords.plain-yaml \
-    --version 9.8.4 > templated.yaml
+    --version 10.1.1 > templated.yaml
 
 
 k apply -n postgresql -f backup-secret.plain-yaml
