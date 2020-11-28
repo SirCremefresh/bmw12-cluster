@@ -1,12 +1,12 @@
 # Pipeline
-kubectl apply --filename https://github.com/tektoncd/pipeline/releases/download/v0.17.0/release.yaml
+kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.18.1/release.yaml
 
 # Dashboard
 https://github.com/tektoncd/dashboard/blob/master/docs/install.md
-kubectl apply --filename https://github.com/tektoncd/dashboard/releases/download/v0.10.0/tekton-dashboard-release.yaml
+kubectl apply --filename https://github.com/tektoncd/dashboard/releases/download/v0.11.1/tekton-dashboard-release.yaml
 
 # Triggers
-kubectl apply --filename https://github.com/tektoncd/triggers/releases/download/v0.8.1/release.yaml
+kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.10.0/release.yaml
 
 
 k create namespace tekton-runs
