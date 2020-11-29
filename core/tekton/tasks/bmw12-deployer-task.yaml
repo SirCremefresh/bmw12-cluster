@@ -23,7 +23,7 @@ spec:
           mountPath: "/workspace/private-key"
           readOnly: true
       script: |
-        #! /bin/bash
+        #!/bin/bash
         git clone https://github.com/SirCremefresh/bmw12-cluster.git
         if [ $? -ne 0 ]; then
           echo "Could not clone repository" 1>&2
