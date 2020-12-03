@@ -6,8 +6,7 @@ https://github.com/tektoncd/dashboard/blob/master/docs/install.md
 kubectl apply --filename https://github.com/tektoncd/dashboard/releases/download/v0.11.1/tekton-dashboard-release.yaml
 
 # Triggers
-kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.10.0/release.yaml
-
+kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.10.1/release.yaml
 
 k create namespace tekton-runs
 
