@@ -1,5 +1,6 @@
 # BMW12 Kubernetes Cluster
 
+This repo contains all the resources for the v1 of my 3 node home kubernetes cluster. It was a great learning project but i am now doing a start from scratch for v2.
 
 ## Install
 ```bash
